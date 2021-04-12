@@ -1,0 +1,41 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Result!'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+       <div class="py-5">
+           <div>
+               <h2>문제창</h2>
+
+           </div>
+           <div>
+               <span>A. ~~~</span>
+               <span>B. ~~~</span>
+               <span>C. ~~~</span>
+               <span>D. ~~~</span>
+           </div>
+           <div>
+               <h2>해답</h2>
+           </div>
+       </div>
+        <div class="row">
+            <div class="col-8"></div>
+            <div class="col-2">
+        <form>
+            <button class="btn btn-primary"> 오답노트 추가</button>
+        </form>
+            </div>
+            <div class="col-2">
+        <button class="btn btn-primary">목록으로</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

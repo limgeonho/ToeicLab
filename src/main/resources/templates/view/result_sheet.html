@@ -1,0 +1,202 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Result!'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sheet/result_sheet.css}">
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="py-3 row">
+            <div class="col-9">
+                <div class="row">
+                    <span class="col-3">연습문제/모의시험</span><span class="col-9">문제풀이 결과</span>
+                </div>
+                <hr/>
+            </div>
+            <div class="col-3">
+                <span>맞은 문항/전체 문항</span>
+                <hr/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div>
+                    <div id="part1-div" th:if="${questionType.contains('PART1')}" style="clear:both;">
+                        <div class="row">
+                            <div class="col-2">
+                                <span>PART1</span>
+                                <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#part1">결과보기</button>
+                            </div>
+                            <div class="col-7">
+                                <span id="part1" class="collapse" th:each="question:${questionList}">
+                                    <form action="" th:action="@{/detail/{id}(id=${question.id})}" method="post" >
+                                        <button th:if="${question.getQuestionType().toString().equals('PART1')}" class="btn btn-sm" th:classappend="${question.getAnswer().equals(userAnswer.get(question.id))} ? 'btn-primary' : 'btn-danger'" th:value="${question.id}">
+    <!--                                <button th:if="${question.getQuestionType().toString().equals('PART1')}" th:classappend="${userAnswer.get(question.id).equals(null)} ? 'btn btn-sm btn-secondary' : ${question.getAnswer().equals(userAnswer.get(question.id))} ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-danger'">-->
+                                            <input th:type="hidden" th:name="questionSetId" th:value="${questionSetId}">
+                                            <a th:text="${question.id}"></a>
+                                        </button>
+                                    </form>
+                                </span>
+                            </div>
+                            <div th:if="${eachstrings[1] != null}" class="col-3">
+                                <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#str1">정답률</button>
+                                <span id="str1" class="collapse" th:text="${eachstrings[1]}"></span>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <div id="part2-div" th:if="${questionType.contains('PART2')}" style="clear:both;">
+                        <div class="row">
+                            <div class="col-2">
+                                <span>PART2</span>
+                                <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#part2">결과보기</button>
+                            </div>
+                            <div class="col-7">
+                                <span id="part2" class="collapse" th:each="question:${questionList}">
+                                    <form action="" th:action="@{/detail/{id}(id=${question.id})}" method="post">
+                                        <button th:if="${question.getQuestionType().toString().equals('PART2')}" class="btn btn-sm" th:classappend="${question.getAnswer().equals(userAnswer.get(question.id))} ? 'btn-primary' : 'btn-danger'" th:value="${question.id}">
+                                            <input th:type="hidden" th:name="questionSetId" th:value="${questionSetId}">
+                                            <a th:text="${question.id}"></a>
+                                        </button>
+                                    </form>
+                                </span>
+                            </div>
+                            <div th:if="${eachstrings[2] != null}" class="col-3">
+                                <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#str2">정답률</button>
+                                <span id="str2" class="collapse" th:text="${eachstrings[2]}"></span>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <div id="part3-div" th:if="${questionType.contains('PART3')}">
+                        <div class="row">
+                            <div class="col-2">
+                                <span>PART3</span>
+                                <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#part3">결과보기</button>
+                            </div>
+                            <div class="col-7">
+                                <span id="part3" class="collapse" th:each="question:${questionList}">
+                                    <form action="" th:action="@{/detail/{id}(id=${question.id})}" method="post">
+                                        <button th:if="${question.getQuestionType().toString().equals('PART3')}" class="btn btn-sm btn-group" th:classappend="${question.getAnswer().equals(userAnswer.get(question.id))} ? 'btn-primary' : 'btn-danger'" th:value="${question.id}">
+                                            <input th:type="hidden" th:name="questionSetId" th:value="${questionSetId}">
+                                            <a th:text="${question.id}"></a>
+                                        </button>
+                                    </form>
+                                </span>
+                            </div>
+                            <div th:if="${eachstrings[3] != null}" class="col-3">
+                                <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#str3">정답률</button>
+                                <span id="str3" class="collapse" th:text="${eachstrings[3]}"></span>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <div id="part4-div" th:if="${questionType.contains('PART4')}">
+                        <div class="row">
+                            <div class="col-2">
+                                <span>PART4</span>
+                                <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#part4">결과보기</button>
+                            </div>
+                            <div class="col-7">
+                                <span id="part4" class="collapse" th:each="question:${questionList}">
+                                    <form action="" th:action="@{/detail/{id}(id=${question.id})}" method="post">
+                                        <button th:if="${question.getQuestionType().toString().equals('PART4')}" class="btn btn-sm btn-group" th:classappend="${question.getAnswer().equals(userAnswer.get(question.id))} ? 'btn-primary' : 'btn-danger'" th:value="${question.id}">
+                                            <input th:type="hidden" th:name="questionSetId" th:value="${questionSetId}">
+                                            <a th:text="${question.id}"></a>
+                                        </button>
+                                    </form>
+                                </span>
+                            </div>
+                            <div th:if="${eachstrings[4] != null}" class="col-3">
+                                <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#str4">정답률</button>
+                                <span id="str4" class="collapse" th:text="${eachstrings[4]}"></span>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <div id="part5-div" th:if="${questionType.contains('PART5')}">
+                        <div class="row">
+                            <div class="col-2">
+                                <span>PART5</span>
+                                <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#part5">결과보기</button>
+                            </div>
+                            <div class="col-7">
+                                <span id="part5" class="collapse" th:each="question:${questionList}">
+                                    <form action="" th:action="@{/detail/{id}(id=${question.id})}" method="post">
+                                        <button th:if="${question.getQuestionType().toString().equals('PART5')}" class="btn btn-sm btn-group" th:classappend="${question.getAnswer().equals(userAnswer.get(question.id))} ? 'btn-primary' : 'btn-danger'" th:value="${question.id}">
+                                            <input th:type="hidden" th:name="questionSetId" th:value="${questionSetId}">
+                                            <a th:text="${question.id}"></a>
+                                        </button>
+                                    </form>
+                                </span>
+                            </div>
+                            <div th:if="${eachstrings[5] != null}" class="col-3">
+                                <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#str5">정답률</button>
+                                <span id="str5" class="collapse" th:text="${eachstrings[5]}"></span>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <div id="part6-div" th:if="${questionType.contains('PART6')}">
+                        <div class="row">
+                            <div class="col-2">
+                                <span>PART6</span>
+                                <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#part6">결과보기</button>
+                            </div>
+                            <div class="col-7">
+                                <span id="part6" class="collapse" th:each="question:${questionList}">
+                                    <form action="" th:action="@{/detail/{id}(id=${question.id})}" method="post">
+                                        <button th:if="${question.getQuestionType().toString().equals('PART6')}" class="btn btn-sm btn-group" th:classappend="${question.getAnswer().equals(userAnswer.get(question.id))} ? 'btn-primary' : 'btn-danger'" th:value="${question.id}">
+                                            <input th:type="hidden" th:name="questionSetId" th:value="${questionSetId}">
+                                            <a th:text="${question.id}"></a>
+                                        </button>
+                                    </form>
+                                </span>
+                            </div>
+                            <div th:if="${eachstrings[6] != null}" class="col-3">
+                                <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#str6">정답률</button>
+                                <span id="str6" class="collapse" th:text="${eachstrings[6]}"></span>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <div id="part7-div" th:if="${questionType.contains('PART7_SINGLE_PARAGRAPH')||questionType.contains('PART7_MULTIPLE_PARAGRAPH')}">
+                        <div class="row">
+                            <div class="col-2">
+                                <span>PART7</span>
+                                <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#part7">결과보기</button>
+                            </div>
+                            <div class="col-7">
+                                <span id="part7" class="collapse" th:each="question:${questionList}">
+                                    <form action="" th:action="@{/detail/{id}(id=${question.id})}" method="post">
+                                        <button th:if="${question.getQuestionType().toString().equals('PART7_SINGLE_PARAGRAPH') || question.getQuestionType().toString().equals('PART7_MULTIPLE_PARAGRAPH')}" class="btn btn-sm btn-group" th:classappend="${question.getAnswer().equals(userAnswer.get(question.id))} ? 'btn-primary' : 'btn-danger'" th:value="${question.id}">
+                                            <input th:type="hidden" th:name="questionSetId" th:value="${questionSetId}">
+                                            <a th:text="${question.id}"></a>
+                                        </button>
+                                    </form>
+                                </span>
+                            </div>
+                            <div th:if="${eachstrings[7] != null}" class="col-3">
+                                <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#str7">정답률</button>
+                                <span id="str7" class="collapse" th:text="${eachstrings[7]}"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <div class="py-3 row">
+            <div class="col-7"></div>
+            <div class="col-2"><button onclick="location.href='/'">홈으로 이동</button></div>
+            <div th:if="${studyGroupId == null}" class="col-3"><button onclick="location.href='/my_progress'">학습현황으로 이동</button></div>
+            <div th:if="${studyGroupId != null}" class="col-3"><button th:onclick="'location.href = \'' + @{/my_studygroup_detail/{id}(id=${studyGroupId})} + '\''">스터디로 이동</button></div>
+        </div>
+    </div>
+</div>
+</html>

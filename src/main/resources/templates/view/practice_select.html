@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Set Question'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/select/practice_select.css}">
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="py-5">
+            <form th:if="${practice.equals('lc')}" action="" th:action="@{/practice/{id}(id=${'lc'})}" method="post">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <label>PART 1 문제 수를 선택하세요</label>
+                        <select id="PART1" name="PART1">
+                            <option selected value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                        <br>
+                        <label>PART 2 문제 수를 선택하세요</label>
+                        <select id="PART2" name="PART2">
+                            <option selected value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                        <br>
+                        <label>PART 3 문제 수를 선택하세요</label>
+                        <select id="PART3" name="PART3">
+                            <option selected value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                        <br>
+                        <label>PART 4 문제 수를 선택하세요</label>
+                        <select id="PART4" name="PART4">
+                            <option selected value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <div id="lc-sub-btn">
+                    <button type="submit" class="btn btn-primary">연습 문제 풀기</button>
+                </div>
+            </form>
+
+            <form th:if="${practice.equals('rc')}" action="" th:action="@{/practice/{id}(id=${'rc'})}" method="post">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div>
+                        <label>PART 5 문제 수를 선택하세요</label>
+                        <select id="PART5" name="PART5">
+                            <option selected value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                        <br>
+                        <label>PART 6 문제 수를 선택하세요</label>
+                        <select id="PART6" name="PART6">
+                            <option selected value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                        <br>
+                        <label>PART 7 단일지문 문제 수를 선택하세요</label>
+                        <select id="PART7-single" name="PART7-single">
+                            <option selected value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                        <br>
+                        <label>PART 7 복수지문 문제 수를 선택하세요</label>
+                        <select id="PART7-multiple" name="PART7-multiple">
+                            <option selected value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <div id="rc-sub-btn">
+                    <button type="submit" class="btn btn-primary">연습 문제 풀기</button>
+                </div>
+            </form>
+
+            <form th:if="${practice.equals('spk')}" action="" th:action="@{/practice/{id}(id=${'spk'})}" method="post">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div>
+                        <label>SPEAKING 문제 수를 선택하세요</label>
+                        <select id="PARTspk" name="PARTspk">
+                            <option selected value="0">0</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <div id="spk-sub-btn">
+                    <button type="submit" class="btn btn-primary float-right">연습 문제 풀기</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</html>

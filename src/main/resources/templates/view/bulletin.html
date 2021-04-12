@@ -1,0 +1,63 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Bulletin'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sheet/result_sheet.css}">
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="py-5">
+            <div class="banner">
+                <p>토익관련 정보를 자유롭게 공유하는 게시판입니다.</p>
+            </div>
+            <button class="btn"><a th:href="@{/bulletin_upload}" class="btn btn-dark">글쓰기</a></button>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>번호</td>
+                    <td>제목</td>
+                    <td>작성자</td>
+                    <td>날짜</td>
+                    <td>조회수</td>
+                    <td>좋아요</td>
+                    <td>상세/댓글</td>
+                </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="bulletin : ${bulletinList}">
+                        <th scope="row" th:text="${bulletinStat.index + 1}">1</th>
+
+                        <td th:text="${bulletin.getTitle}"></td>
+                        <td th:text="${bulletin.getNickname()}"></td>
+                        <td th:text="${bulletin.getDate()}"></td>
+                        <td th:text="${bulletin.getHit()}"></td>
+                        <td th:text="${bulletin.getLikeNumber()}"></td>
+                        <td> <a th:href="@{/bulletinDetail/{id}(id=${bulletin.id})}" class="btn btn-outline-primary btn-sm">상세 보기</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr/>
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item"><a class="page-link" th:href="@{/bulletin?page=1}" aria-label="Previous"><span aria-hidden="true">처음</span></a></li>
+                    <li class="page-item"> <a class="page-link" th:href="@{/bulletin?page={page} (page = ${pagination.prevBlock})}" aria-label="Previous"><span aria-hidden="true">이전</span></a></li>
+
+                    <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+                        <li class="page-item"
+                            th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"
+                            th:each="pageButton : ${#numbers.sequence(start, end)}">
+                            <a class="page-link active" th:href="@{/bulletin?page={page} (page = ${pageButton})}" th:text=${pageButton}></a>
+                        </li>
+                    </th:block>
+                    <li class="page-item"><a class="page-link" th:href="@{/bulletin?page={page} (page = ${pagination.nextBlock})}" aria-label="Next"><span aria-hidden="true">다음</span></a></li>
+                    <li class="page-item"><a class="page-link" th:href="@{/bulletin?page={page} (page = ${pagination.totalPageCnt})}" aria-label="Previous"><span aria-hidden="true">끝</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+</html>

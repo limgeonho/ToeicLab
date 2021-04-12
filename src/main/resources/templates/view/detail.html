@@ -1,0 +1,89 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Result!'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sheet/sheet.css}">
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="py-5">
+            <div>
+                <p th:if="${question.content != null}" th:text="${question.content}"></p>
+                <span th:if="${question.image} != null">
+                    <img th:src="@{'/images/place_holder_images/' + ${question.image}}" class="img" ><br/>
+                </span>
+            </div>
+            <div th:if="${question.getQuestionType().toString().equals('PART1') || question.getQuestionType().toString().equals('PART2')}">
+                <span th:text="${question.exampleA}"></span>
+                <span th:text="${question.exampleB}"></span>
+                <span th:text="${question.exampleC}"></span>
+                <span th:text="${question.exampleD}"></span>
+                <p th:text="'정답: ' + ${question.answer}"></p>
+                <p th:text="'선택한 답: ' + ${userAnswer.get(question.id)}"></p>
+            </div>
+            <div th:if="${question.getQuestionType().toString().equals('PART5')}">
+                <p th:text="'A. ' + ${question.exampleA}"></p>
+                <p th:text="'B. ' + ${question.exampleB}"></p>
+                <p th:text="'C. ' + ${question.exampleC}"></p>
+                <p th:text="'D. ' + ${question.exampleD}"></p>
+                <p th:text="'정답: ' + ${question.answer}"></p>
+                <p th:text="'선택한 답: ' + ${userAnswer.get(question.id)}"></p>
+            </div>
+            <div th:if="${question.getQuestionType().toString().equals('PART3') || question.getQuestionType().toString().equals('PART4') || question.getQuestionType().toString().equals('PART6') || question.getQuestionType().toString().equals('PART7_MULTIPLE_PARAGRAPH') || question.getQuestionType().toString().equals('PART7_SINGLE_PARAGRAPH')}">
+                <p th:text="'A. ' + ${question.exampleA}"></p>
+                <p th:text="'B. ' + ${question.exampleB}"></p>
+                <p th:text="'C. ' + ${question.exampleC}"></p>
+                <p th:text="'D. ' + ${question.exampleD}"></p>
+                <p th:text="'정답: ' + ${question.answer}"></p>
+                <p th:text="'선택한 답: ' + ${userAnswer.get(question.id)}"></p>
+            </div>
+            <div>
+                <p th:text="'Solution: ' + ${question.solution}"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+<!--                <button th:if="${question.getQuestionType().toString().equals('PART1') || question.getQuestionType().toString().equals('PART2') || question.getQuestionType().toString().equals('PART3') || question.getQuestionType().toString().equals('PART4')}" class="btn btn-primary">다시듣기</button>-->
+                <audio th:if="${question.getQuestionType().toString().equals('PART1') || question.getQuestionType().toString().equals('PART2') || question.getQuestionType().toString().equals('PART3') || question.getQuestionType().toString().equals('PART4')}"  controls><source type="audio/mp3" th:src="@{'/audio/' + ${question.recording}}"></audio>
+            </div>
+            <div class="col-2">
+                <button id="addReview" class="btn btn-primary"> 오답노트 추가</button>
+            </div>
+            <div class="col-2">
+                <!--                <form th:action="@{/back/{questionSetId}(questionSetId=${questionSetId})}" th:method="post">-->
+                <form th:action="@{/result_sheet/{questionSetId}(questionSetId=${questionSetId})}" th:method="post">
+                    <input type="hidden" th:name="questionSetId" th:value="${questionSetId}">
+                    <input type="hidden" th:each="map:${userAnswer}" th:name="${map.getKey()}" th:value="${map.getValue()}">
+                    <button type="submit" class="btn btn-primary">목록으로</button>
+                </form>
+            </div>
+        </div>
+
+        <script th:inline="javascript">
+            $(document).ready(function (){
+                $("#addReview").click(function (){
+                    $.ajax({
+                        type: 'GET',
+                        url: '/add_review_note',
+                        data: {"id":[[${question.id}]],"answer":[[${userAnswer.get(question.id)}]]},
+                        dataType: 'json',
+                        success: function (result){
+                            $('.modal-body').html(result.message);
+                            $('#exampleModalCenter').modal('show');
+                        }
+                    });
+                });
+            });
+        </script>
+
+
+    </div>
+</div>
+
+
+
+</html>

@@ -1,0 +1,25 @@
+.index-img {
+    max-width: 100%;
+    padding-top: 1.875em;
+}
+
+#index1 {
+    padding-right: 1.250em;
+}
+
+div .py-5 {
+    padding-top: 0.5rem!important;
+}
+
+.index {
+    padding-left: 5.625em;
+    padding-right: 1.250em;
+}
+.d-block {
+    max-width: 100%;
+}
+
+#carouselExampleIndicators {
+    padding-right: 0.625em;
+    padding-left: 0.625em;
+}

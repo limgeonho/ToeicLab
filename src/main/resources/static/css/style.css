@@ -1,0 +1,20 @@
+#create-meeting {
+  padding: 30px;
+}
+
+#create-meeting .py-5{
+  border: #71b35e solid 1px;
+  text-align: center;
+}
+
+#create-meeting #top{
+  text-align: center;
+}
+
+#time{
+  padding: 20px 60px;
+}
+
+#sub-btn{
+  padding: 20px 60px;
+}

@@ -1,0 +1,96 @@
+#submit_btn{
+    padding: 0.625em;
+    text-align: right;
+}
+.img{
+    width: 33.125em;
+    height: 21.250em;
+}
+.container h3{
+    text-align: center;
+    padding: 1.250em;
+}
+.form-check {
+    margin-left: 1.250em;
+    margin-top: 0.625em;
+    margin-right: 1.250em;
+}
+#btn{
+    margin-top: 18.750em;
+}
+
+
+.list {
+    counter-reset: number;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column-reverse;
+}
+.list li::before{
+    counter-increment: number;
+    content: counter(number)"\a0";
+}
+
+.direction {
+    padding-top: 2em;
+    padding-bottom: 1em;
+    font-size: 1.5rem;
+    font-family: "Hi Melody", sans-serif;
+}
+
+.submit_btn {
+    text-align: right;
+}
+
+img {
+    padding-bottom: 1em;
+}
+
+#content {
+    padding-bottom: 1em;
+}
+
+.form-check-part {
+    text-align: left;
+}
+
+#content-part {
+    justify-content: left;
+}
+
+.audio-part {
+    text-align: left;
+    margin-left: 0.938em;
+}
+
+.row-part3 {
+    padding-bottom: 0.625em;
+    padding-left: 1.563em;
+}
+
+.row-part4 {
+    padding-bottom: 0.625em;
+    padding-left: 1.563em;
+}
+
+.row-part2 {
+    justify-content: center;
+    padding-bottom: 0.625em;
+}
+
+.row-part5 {
+    padding-bottom: 1.250em;
+    padding-left: 0.938em;
+}
+.row-part6 {
+    padding-bottom: 1.250em;
+    padding-left: 1.563em;
+}
+.row-part7 {
+    padding-bottom: 1.250em;
+    padding-left: 1.563em;
+}
+
+.radio-part {
+    text-align: left;
+}

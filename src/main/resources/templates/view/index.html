@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Hello!'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/common/index.css}">
+</th:block>
+
+<div layout:fragment="content">
+    <div class="py-5">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <a href="https://www.ybmedu.com/?utm_source=toeic.co.kr&utm_medium=toeic_banner&utm_campaign=examtoeic">
+                    <img class="d-block w-100" src="https://upsisa.ybmnet.co.kr:444/si/exam_ybmsisa_com/mainbanner/2021040517314974281853.jpg" alt="First slide">
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="https://exam.toeic.co.kr/event/release_toeic.php">
+                    <img class="d-block w-100" src="https://upsisa.ybmnet.co.kr:444/si/exam_ybmsisa_com/mainbanner/20201214140121592688705.jpg" alt="Second slide">
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="https://www.toeicbridge.co.kr/">
+                    <img class="d-block w-100" src="https://upsisa.ybmnet.co.kr:444/si/exam_ybmsisa_com/mainbanner/20200924110615763949375.jpg" alt="Third slide">
+                    </a>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    <div>
+       <div id="index1">
+           <img class="index-img w-100" th:src="@{/images/index/index1.png}">
+       </div>
+        <div class="index">
+            <a th:href="@{/apply_studygroup}">
+                <img class="index-img w-100" th:src="@{/images/index/index2.png}">
+            </a>
+        </div>
+        <div class="index">
+            <a th:href="@{/select_test}">
+                <img class="index-img w-100" th:src="@{/images/index/index3.png}">
+            </a>
+        </div>
+        <div class="index">
+            <a th:href="@{/practice_select/{id}(id=${'lc'})}">
+                <img class="index-img w-100" th:src="@{/images/index/index4.png}">
+            </a>
+        </div>
+
+
+    </div>
+
+</div>
+</div>
+</html>

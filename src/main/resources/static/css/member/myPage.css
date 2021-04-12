@@ -1,0 +1,23 @@
+.g-10{
+    margin-left: 1px;
+}
+
+.btn-group{
+    margin-left: 590px;
+}
+
+#my-page-container {
+    padding-left:  10em;
+    padding-right: 10em;
+}
+
+.row {
+    padding: 10px;
+}
+
+#group-button {
+    float: right;
+}
+.group-btn {
+    width: 6.250em;
+}

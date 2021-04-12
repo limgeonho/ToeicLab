@@ -1,0 +1,37 @@
+thead, .banner, .pagination {
+    font-family: "Gugi", sans-serif;
+}
+
+#upload-btn {
+    text-align: right;
+    font-family: "Gugi", sans-serif;
+}
+
+#forum_list {
+    font-family: "Hi Melody", sans-serif;
+}
+
+textarea {
+    min-height: 10em;
+}
+
+.row {
+    padding-left: 0.938em;
+}
+
+#file_form {
+    width: 85%;
+}
+
+#readText {
+    width: 10%;
+}
+
+#empty {
+    width: 3%;
+}
+
+#upload-submit {
+    text-align: right;
+    font-family: "Gugi", sans-serif;
+}

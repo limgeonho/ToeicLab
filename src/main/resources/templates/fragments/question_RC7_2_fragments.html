@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<div th:fragment="question_list(questionList)">
+    <div class="container">
+        <ol>
+            <div th:each="question:${questionList}">
+                <!--PART7_MULTIPLE_PARAGRAPH-->
+                <div class="py-5" th:if="${question.getQuestionType().toString().equals('PART7_MULTIPLE_PARAGRAPH')}">
+                    <div class="row row-part7">
+                        <span th:if="${question.image} != null" th:classappend="${question.image} != null? 'col-6': ''">
+                            <li><img th:src= "@{/images/place_holder_images/ + ${question.image}}" class="img" ></li><br/>
+                        </span>
+                        <p>
+                            <li><span th:text="${question.content}" th:classappend="${question.image} != null? 'col-6': 'col-12'"></span></li>
+                        </p>
+                    </div>
+                    <div class="radio-part">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" th:name="${question.id}" th:value="A" id="part7_ma">
+                            <label class="form-check-label" for="part7_ma" th:text="'A. '+ ${question.exampleA}"></label>
+                        </div><br/>
+                        <div class="form-check">
+                            <input  class="form-check-input" type="radio" th:name="${question.id}" th:value="B" id="part7_mb">
+                            <label class="form-check-label" for="part7_mb" th:text="'B. '+ ${question.exampleB}"></label>
+                        </div><br/>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" th:name="${question.id}" th:value="C" id="part7_mc">
+                            <label class="form-check-label" for="part7_mc" th:text="'C. '+ ${question.exampleC}"></label>
+                        </div><br/>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" th:name="${question.id}" th:value="D" id="part7_md">
+                            <label class="form-check-label" for="part7_md" th:text="'D. '+ ${question.exampleD}"></label>
+                        </div>
+                        <input class="form-check-input" type="radio" th:name="${question.id}" th:value="'null'" id="part1_radio5" checked style="opacity: 0;">
+                    </div>
+                </div>
+
+            </div>
+        </ol>
+    </div>
+</div>
+</html>

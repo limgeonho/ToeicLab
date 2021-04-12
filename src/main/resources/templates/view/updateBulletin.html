@@ -1,0 +1,40 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Result!'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sheet/result_sheet.css}">
+    <script th:src="@{/js/user/form_validation.js}"></script>
+    <script th:src="@{/js/user/daum_address.js}"></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="py-5">
+
+            <form th:action="@{/updateBulletin}" method="post">
+                <div>
+                    <label for="title">글 제목</label>
+                    <input class="form-control" id="id" type="hidden" th:value="${updateBulletin.getId()}" name="id" >
+                    <input class="form-control" id="writerId" type="hidden" th:value="${updateBulletin.getWriterId()}" name="writerId" >
+                    <input class="form-control" id="title" type="text" th:value="${updateBulletin.getTitle()}" name="title" >
+                    <br/>
+
+                    <label for="content">글 내용</label>
+                    <input class="form-control" id="content" type="textarea" th:value="${updateBulletin.getContent()}" name="content" >
+                    <button type="submit" id="updateBulletin" class="btn btn-dark">글 수정</button>
+                </div>
+                <br/>
+
+            </form>
+        </div>
+
+    </div>
+
+</div>
+</html>

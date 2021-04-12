@@ -1,0 +1,9 @@
+package toeicLab.toeicLab.domain;
+
+
+//TODO 더 추가해야하는데 추가 할건지?
+public enum QuestionType {
+    PART1, PART2, PART3, PART4, PART5, PART6, PART7_SINGLE_PARAGRAPH, PART7_MULTIPLE_PARAGRAPH,
+    SPK_PART1, SPK_PART2, SPK_PART3, SPK_PART4, SPK_PART5, SPK_PART6
+    //PIC_DESCRIPTION 등등
+}

@@ -1,0 +1,95 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Result!'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sheet/result_sheet.css}">
+    <script th:src="@{/js/user/form_validation.js}"></script>
+    <script th:src="@{/js/user/daum_address.js}"></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="py-5">
+             <div>
+                <label for="title">글 제목</label>
+                <input class="form-control" id="id" type="hidden" th:value="${forum.getId()}" name="id" readonly>
+                <input class="form-control" id="writerId" type="hidden" th:value="${forum.getUserId()}" name="writerId"
+                       readonly>
+                <input class="form-control" id="title" type="text" th:value="${forum.getTitle()}" name="title" readonly>
+                <br/>
+
+                <label for="questionType">문제 유형</label>
+                <input class="form-control" id="questionType" type="textarea" th:value="${question.getQuestionType()}"
+                       name="content" readonly>
+
+
+                <div th:if="${content != null}">
+                    <label for="content">지문3</label>
+                    <input class="form-control" id="content" type="textarea" th:value="${content}" name="content"
+                           readonly>
+                </div>
+
+                <div th:if="${content2 != null}">
+                    <label for="content2">지문3</label>
+                    <input class="form-control" id="content2" type="textarea" th:value="${content2}" name="content2"
+                           readonly>
+                </div>
+
+                <div th:if="${content3 != null}">
+                    <label for="content3">지문3</label>
+                    <input class="form-control" id="content3" type="textarea" th:value="${content3}" name="content3"
+                           readonly>
+                </div>
+
+                <div th:if="${questionExplanation != null}">
+                    <label for="content">문제 설명</label>
+                    <input class="form-control" id="questionExplanation" type="textarea"
+                           th:value="${questionExplanation}" name="questionExplanation" readonly>
+                </div>
+
+                <div>
+                    <label for="exampleA">A.</label>
+                    <input class="form-control" id="exampleA" type="textarea" th:value="${exampleA}" name="exampleA"
+                           readonly>
+                </div>
+                <div>
+                    <label for="exampleA">B.</label>
+                    <input class="form-control" id="exampleB" type="textarea" th:value="${exampleB}" name="exampleB"
+                           readonly>
+                </div>
+                <div>
+                    <label for="exampleC">C.</label>
+                    <input class="form-control" id="exampleC" type="textarea" th:value="${exampleC}" name="exampleC"
+                           readonly>
+                </div>
+                <div>
+                    <label for="exampleD">D.</label>
+                    <input class="form-control" id="exampleD" type="textarea" th:value="${exampleD}" name="exampleD"
+                           readonly>
+                </div>
+                <div>
+                    <label for="answer">정답.</label>
+                    <input class="form-control" id="answer" type="textarea" th:value="${answer}" name="answer" readonly>
+                </div>
+                <div>
+                    <label for="solution">해설.</label>
+                    <input class="form-control" id="solution" type="textarea" th:value="${solution}" name="solution"
+                           readonly>
+                </div>
+
+            </div>
+            <br/>
+            <hr class="col-12 my-4">
+
+            <button id="goToList" class="btn btn-dark" onclick="location.href='/forum'">목록</button>
+        </div>
+    </div>
+
+</div>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='RC_Sheet'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sheet/sheet.css}">
+</th:block>
+
+
+
+<div layout:fragment="RC_List(questionList)">
+    <div class="container">
+        <form action="" method="post">
+            <h1>RC-SHEET</h1>
+            <!--Part5-->
+            <div th:each="question:${questionList}" class="py-5 text-center">
+                <div>
+                    <p th:type="text">이곳은 문제가 들어올곳</p>
+                </div>
+                <div class="form-check form-check-inline1">
+                    <input class="form-check-input" type="radio" th:name="p5_answer" th:value="A" id="part5_radio1">
+                    <label class="form-check-label" for="part5_radio1" th:text="${ }"></label>
+                </div>
+                <div class="form-check form-check-inline1">
+                    <input  class="form-check-input" type="radio" th:name="p5_answer" th:value="B" id="part5_radio2">
+                    <label class="form-check-label" for="part5_radio2">B. 첫번째 보기</label>
+                </div>
+                <div class="form-check form-check-inline2">
+                    <input class="form-check-input" type="radio" th:name="p5_answer" th:value="C" id="part5_radio3">
+                    <label class="form-check-label" for="part5_radio3">C. 첫번째 보기</label>
+                </div>
+                <div class="form-check form-check-inline2">
+                    <input class="form-check-input" type="radio" th:name="p5_answer" th:value="D" id="part5_radio4">
+                    <label class="form-check-label" for="part5_radio4">D. 첫번째 보기</label>
+                </div>
+            </div>
+
+            <!--Part6 하나의 텍스트에 여러개의 문제가 있다. 어떻게 같이 나오게 할 수 있을까.....-->
+            <!--문제는 6-1, 6-2, 6-3, 6-4 의 문제를 구현해야 한다.-->
+            <div class="py-5 text-center">
+                <div>
+                    <p th:type="text">이곳은 문제가 들어올곳</p>
+                </div>
+                <div class="form-check ">
+                    <input class="form-check-input" type="radio" th:name="p6_answer" th:value="A" id="part6_radio1">
+                    <label class="form-check-label" for="part6_radio1">A. 첫번째 보기</label>
+                </div>
+                <div class="form-check ">
+                    <input  class="form-check-input" type="radio" th:name="p6_answer" th:value="B" id="part6_radio2">
+                    <label class="form-check-label" for="part6_radio2">B. 첫번째 보기</label>
+                </div>
+                <div class="form-check ">
+                    <input class="form-check-input" type="radio" th:name="p6_answer" th:value="C" id="part6_radio3">
+                    <label class="form-check-label" for="part6_radio3">C. 첫번째 보기</label>
+                </div>
+                <div class="form-check ">
+                    <input class="form-check-input" type="radio" th:name="p6_answer" th:value="D" id="part6_radio4">
+                    <label class="form-check-label" for="part6_radio4">D. 첫번째 보기</label>
+                </div>
+            </div>
+
+
+            <!--Part7 하나의 텍스트에 여러개의 문제가 있다. 어떻게 같이 나오게 할 수 있을까.....-->
+            <!--문제는 7-1, 7-2, 7-3, 7-4, 7-5 의 문제를 구현해야 한다.-->
+            <div class="py-5 text-center">
+                <div>
+                    <p th:type="text">이곳은 문제가 들어올곳 텍스트가 3개 정도 있다.</p>
+                    <p th:type="text">이미지를 잘라서 하던지...</p>
+                </div>
+                <div class="form-check ">
+                    <input class="form-check-input" type="radio" th:name="p7_answer" th:value="A" id="part7_radio1">
+                    <label class="form-check-label" for="part7_radio1">A. 첫번째 보기</label>
+                </div>
+                <div class="form-check ">
+                    <input  class="form-check-input" type="radio" th:name="p7_answer" th:value="B" id="part7_radio2">
+                    <label class="form-check-label" for="part7_radio2">B. 첫번째 보기</label>
+                </div>
+                <div class="form-check ">
+                    <input class="form-check-input" type="radio" th:name="p7_answer" th:value="C" id="part7_radio3">
+                    <label class="form-check-label" for="part7_radio3">C. 첫번째 보기</label>
+                </div>
+                <div class="form-check ">
+                    <input class="form-check-input" type="radio" th:name="p7_answer" th:value="D" id="part7_radio4">
+                    <label class="form-check-label" for="part7_radio4">D. 첫번째 보기</label>
+                </div>
+            </div>
+            <div id="submit_btn">
+                <button type="submit" class="btn btn-primary" >저장</button>
+                <button type="submit" class="btn btn-primary" >제출 및 채점</button>
+            </div>
+        </form>
+    </div>
+</div>
+</html>

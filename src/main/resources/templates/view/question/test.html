@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Test'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sheet/sheet.css}">
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <h3 th:text="${type} + ' 모의시험'"></h3>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#p1">part1</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link " data-toggle="tab" href="#p2">part2</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link " data-toggle="tab" href="#p3">part3</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link " data-toggle="tab" href="#p4">part4</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link " data-toggle="tab" href="#p5">part5</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link " data-toggle="tab" href="#p6">part6</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link " data-toggle="tab" href="#p7s">part7S</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link " data-toggle="tab" href="#p7m">part7M</a>
+            </li>
+        </ul>
+        <form th:action="@{/result_sheet/{questionSetId}(questionSetId=${questionSet.getId()})}" th:method="post">
+            <input type="hidden" th:name="questionSetId" th:value="${questionSet.getId()}">
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="p1">
+                    <div class="banner">
+                        <p class="direction">
+                            PART1 <br/><br/>
+                            Directions: For each question in this part, you will hear four statements about a picture in your test book.<br/>
+                            When you hear the statements, you must select the one statement that best describes what you see in the picture.<br/>
+                            Then find the number of the question on your answer sheet and mark your answer. <br/>
+                            The statements will not be printed in your test book and will be spoken only one time.
+                        </p>
+                    </div>
+                    <th:block th:insert="fragments/question_LC1_fragments :: question_list(${questionList})"/>
+                </div>
+                <div class="tab-pane fade" id="p2">
+                    <div class="banner">
+                        <p class="direction">
+                            PART2<br/><br/>
+                            Directions: You will hear a question or statement and three responses spoken in English.<br/>
+                            They will not be printed in your test book and will be spoken only one time.<br/>
+                            Select the best response to the question or statement and mark the letter (A), (B), or (C) on you answer sheet.
+                        </p>
+                    </div>
+                    <th:block th:insert="fragments/question_LC2_fragments :: question_list(${questionList})"/>
+                </div>
+                <div class="tab-pane fade" id="p3">
+                    <div class="banner">
+                        <p class="direction">
+                            PART3<br/><br/>
+                            Directions: You will hear some conversation between two or more people. <br/>
+                            You will be asked to answer three questions about what the speaker say in each conversation. <br/>
+                            Select the best response to each question and mark the letter (A), (B), (C), or (D) on your answer sheet. <br/>
+                            The conversations will not be printed in your test book and will be spoken only one time.
+                        </p>
+                    </div>
+                    <th:block th:insert="fragments/question_LC3_fragments :: question_list(${questionList})"/>
+                </div>
+                <div class="tab-pane fade" id="p4">
+                    <div class="banner">
+                        <p class="direction">
+                            PART4<br/><br/>
+                            Directions: You will hear some talks given by a single speaker.<br/>
+                            You will be asked to answer three questions about what the speaker says in each talk.<br/>
+                            Select the best response to each question and mark the letter (A), (B), (C) or (D) on your answer sheet.<br/>
+                            the talk will not be printed in your test book and will be spoken only one time.
+                        </p>
+                    </div>
+                    <th:block th:insert="fragments/question_LC4_fragments :: question_list(${questionList})"/>
+                </div>
+                <div class="tab-pane fade" id="p5">
+                    <div class="banner">
+                        <p class="direction">
+                            PART 5<br/><br/>
+                            Directions: A word or phrase is missing in each of the sentences below. <br/>
+                            Four answer choices are given below each sentence. Select the best answer to complete the sentence. <br/>
+                            Then mark the letter (A), (B), (C), or (D) on your answer sheet.
+                        </p>
+                    </div>
+                    <th:block th:insert="fragments/question_RC5_fragments :: question_list(${questionList})"/>
+                </div>
+                <div class="tab-pane fade" id="p6">
+                    <div class="banner">
+                        <p class="direction">
+                            PART 6<br/><br/>
+                            Directions: Read the texts that follow. A word, phrase, or sentence is missing in parts of each text.<br/>
+                            Four answer choices for each question are given below the text. <br/>
+                            Select the best answer to complete the text. <br/>
+                            Then mark the letter (A), (B), (C), or (D) on your answer sheet.
+                        </p>
+                    </div>
+                    <th:block th:insert="fragments/question_RC6_fragments :: question_list(${questionList})"/>
+                </div>
+                <div class="tab-pane fade" id="p7s">
+                    <p class="direction">
+                        PART 7<br/><br/>
+                        Directions: In this part you will read a selection of texts, such as magazine and newspaper articles, e-mails, and instant messages. <br/>
+                        Each text or set of texts is followed by several questions. <br/>
+                        Select the best answer for each question and mark the letter (A), (B), (C), or (D) on your answer sheet.
+                    </p>
+                    <th:block th:insert="fragments/question_RC7_1_fragments :: question_list(${questionList})"/>
+                </div>
+                <div class="tab-pane fade" id="p7m">
+                    <p class="direction">
+                        PART 7<br/><br/>
+                        Directions: In this part you will read a selection of texts, such as magazine and newspaper articles, e-mails, and instant messages. <br/>
+                        Each text or set of texts is followed by several questions. <br/>
+                        Select the best answer for each question and mark the letter (A), (B), (C), or (D) on your answer sheet.
+                    </p>
+                    <th:block th:insert="fragments/question_RC7_2_fragments :: question_list(${questionList})"/>
+                </div>
+            </div>
+            <div id="submit_btn">
+                <button type="button" class="btn btn-primary" onclick="location.href='#header'">맨위로 이동</button>
+                <button type="submit" class="btn btn-primary" >제출 및 채점</button>
+            </div>
+        </form>
+    </div>
+</div>
+</html>

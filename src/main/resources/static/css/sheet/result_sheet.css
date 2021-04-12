@@ -1,0 +1,9 @@
+#part1, #part2, #part3, #part4, #part5, #part6, #part7 {
+    float: left;
+}
+#part1-div, #part2-div, #part3-div, #part4-div, #part5-div, #part6-div, #part7-div {
+    clear: both;
+}
+#part1-str, #part2-str, #part3-str, #part4-str, #part5-str, #part6-str, #part7-str {
+    clear: both;
+}

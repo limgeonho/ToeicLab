@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='vocabularyList'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/member/progress.css}">
+</th:block>
+<script th:inline="javascript">
+    function word(test) {
+        alert(test)
+        $.ajax({
+            type: 'GET',
+            url: '/delete_word',
+            // data: {"word": $(|#b${word.getKey()}|).val().toString()},
+            data: {"word": test},
+            dataType: 'json',
+            success: function (result) {
+                $('.modal-body').html(result.message);
+                $('#exampleModalCenter').modal('show');
+            },
+        });
+    }
+</script>
+<div layout:fragment="content">
+    <div th:if="${exist} != null">
+        <div class="row justify-content-center" style="border: antiquewhite solid 1px; padding: 15px; margin-bottom: 20px;">
+            <a>
+                등록된 단어들이 없습니다.
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row div" style="border: antiquewhite solid 1px; padding: 15px; margin-bottom: 20px;">
+            <label class="col-2" style="margin-top: 10px;">단어시험 보기</label>
+            <select class="col-2" id="type" name="type">
+                <option selected value="toko">영 -> 한</option>
+                <option value="toen">한 -> 영</option>
+            </select>
+            <div class="col-1"></div>
+            <select class="col-4" id="count" name="count">
+                <option selected>문제수를 선택하세요</option>
+                <option value="1">1</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+            </select>
+            <div class="col-1"></div>
+            <button type="submit" class="btn btn-primary col-2" id="btn">시험보러가기</button>
+            <div class="col-1"></div>
+        </div>
+
+        <div class="text-center" th:each="word, index:${wordList}">
+            <div class="row">
+                <div class="col-1">
+                    <p th:text="${index.count}"></p>
+                </div>
+                <div class="col-3">
+                    <a th:text="${word.getKey()}"></a>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-5">
+                    <a th:text="${word.getValue()}"></a>
+                </div>
+                <div class="col-1"></div>
+                <!--                <button type="button" class="btn btn-primary col-1" th:id="${word.getKey()}">삭제</button>-->
+                <button type="button" class="btn btn-primary col-1"><a data-toggle="modal" data-target="#delete_word">삭제</a></button>
+                <!--                <button type="button" class="btn btn-primary col-1"><a th:href="@{/delete_word/{word}(word=${word.getKey()})}" data-toggle="modal" data-target="#delete_word">삭제</a></button>-->
+                <!--                <button type="button" class="btn btn-primary col-1"><a th:href="@{/delete_word/{word}(word=${word.getKey()})}">삭제</a></button>-->
+                <!--                    <button type="button" class="btn btn-primary col-1" th:onclick="|javascript:word('${word.getKey()}')|">삭제</button>-->
+                <!--                    <button type="button" class="btn btn-primary col-1"  th:onclick="|javascript:word('${word.getKey()}')|">삭제</button>-->
+                <!--                <button type="button" class="btn btn-primary col-1" data-toggle="modal" data-target="#delete_word">삭제하기</button>-->
+                <div class="modal fade" id="delete_word" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">단어 삭제</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">단어를 삭제하시겠습니까?</div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" ><a th:href="@{/delete_word/{word}(word=${word.getKey()})}">삭제하기</a></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Modal -->
+
+</div>
+</html>

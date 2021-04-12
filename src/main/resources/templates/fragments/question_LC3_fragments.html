@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<div th:fragment="question_list(questionList)">
+    <div class="container">
+        <ol>
+            <div th:each="question:${questionList}">
+                <!--part3-->
+                <div class="py-5 text-center" th:if="${question.getQuestionType().toString().equals('PART3')}">
+                    <div class="row row-part3">
+                        <!--<img th:src="@{/images/place_holder_images/ + ${question.image}}" class="img" >-->
+                        <span th:if="${question.image} != null" th:classappend="${question.image} != null? 'col-4': ''">
+                           <img th:src= "@{/images/place_holder_images/ + ${question.image}}" class="img" ><br/>
+                        </span>
+                        <li><span id="content-part" th:text="${question.content}" th:classappend="${question.image} != null? 'col-4': 'col-8'"></span></li><br/>
+                        <div class="col-4"></div>
+                    </div>
+                    <div class="audio-part">
+                        <audio controls><source type="audio/mp3" th:src="@{'/audio/' + ${question.recording}}"></audio>
+                    </div>
+                    <div class="form-check form-check-part">
+                        <input class="form-check-input" type="radio" th:name="${question.id}" th:value="A" id="part3_radio1">
+                        <label class="form-check-label" for="part3_radio1" th:text="'A. '+ ${question.exampleA}"></label>
+                    </div>
+                    <div class="form-check form-check-part">
+                        <input  class="form-check-input" type="radio" th:name="${question.id}" th:value="B" id="part3_radio2">
+                        <label class="form-check-label" for="part3_radio2" th:text="'B. '+ ${question.exampleB}"></label>
+                    </div>
+                    <div class="form-check form-check-part">
+                        <input class="form-check-input" type="radio" th:name="${question.id}" th:value="C" id="part3_radio3">
+                        <label class="form-check-label" for="part3_radio3" th:text="'C. '+ ${question.exampleC}"></label>
+                    </div>
+                    <div class="form-check form-check-part">
+                        <input class="form-check-input" type="radio" th:name="${question.id}" th:value="D" id="part3_radio4">
+                        <label class="form-check-label" for="part3_radio4" th:text="'D. '+ ${question.exampleD}"></label>
+                    </div>
+                    <input class="form-check-input form-check-part" type="radio" th:name="${question.id}" th:value="'null'" id="part1_radio5" checked style="opacity: 0;">
+                </div>
+            </div>
+        </ol>
+    </div>
+</div>
+</html>

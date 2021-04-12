@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Send_Find_Id_Link'">
+<div layout:fragment="content">
+    <div class="container">
+        <main>
+            <div class="py-5 text-center">
+                <h2>아이디 찾기</h2>
+                <p class="lead">아이디를 찾으실 이메일을 입력하세요.</p>
+            </div>
+
+            <div class="row g-10 justify-content-center">
+                <form class="needs-validation" th:action="@{/send_find_id_link}" method="post" name="loginForm" novalidate>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" name="email" class="form-control" id="email" placeholder="you@example.com" aria-describedby="email_help_text" required>
+                            <div class="invalid-feedback">필수 사항입니다.</div>
+                            <small id ="email_help_text" class="form-text text-muted">
+                                가입 시 사용하신 이메일을 입력하세요.
+                            </small>
+                        </div>
+                    </div>
+
+                    <hr class="col-12 my-4">
+                    <button class="w-100 btn btn-dark btn-lg" type="submit">메일 보내기</button>
+                </form>
+            </div>
+
+        </main>
+        <footer class="my-5 pt-5">
+        </footer>
+    </div>
+</div>
+</html>

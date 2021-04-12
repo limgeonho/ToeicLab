@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='ReviewNote'">
+
+<th:block layout:fragment="css">
+
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="py-5 row">
+            <div class="col-7">
+                <h2 th:text="${member1.getUserId()}+'(조장)'"></h2>
+            </div>
+            <div class="col-5">
+                <button type="button" onclick="" class="btn btn-primary">
+                    <a th:href="@{/create_meeting/{id}(id=${id})}">스터디 일정 만들기</a>
+                </button>
+
+                <select class="form-line-select" name="" id="">
+                    <option selected>조장 변경</option>
+                    <option value="">조원 이름</option>
+                </select>
+                <!--스터디 그룹 삭제 아이콘-->
+            </div>
+            <div class="col-12">
+                <h2 th:text="${member2.getUserId()}"></h2>
+            </div>
+            <div class="col-12">
+                <h2 th:text="${member3.getUserId()}"></h2>
+            </div>
+            <div class="col-12">
+                <h2 th:text="${member4.getUserId()}"></h2>
+            </div>
+        </div>
+
+        <h2>스터디 예약 / 진행 현황</h2>
+        <hr>
+        <div class="row">
+            <div class="col-4">
+                <div th:each="meeting:${meetings}">
+                    <span th:text="${meeting.date.toLocalDate()}"></span>
+                    <button type="button" class="btn btn-primary"><a th:href="@{/practice/{id}(id=${meeting.id})}">스터디 시작하기</a></button>
+                    <br>
+                </div>
+            </div>
+            <div class="col-8">
+                <div th:each="questionset:${questionSets}">
+                    <form th:if="${checkToken == questionset.id}" th:action="@{/result_sheet/{questionSetId}(questionSetId=${questionset.id})}" th:method="post">
+                        <input type="hidden" th:name="questionSetId" th:value="${questionset.id}">
+                        <input type="hidden" th:each="map:${questionset.submittedAnswers}" th:name="${map.getKey()}" th:value="${map.getValue()}">
+                        <input type="hidden" th:name="studyGroupId" th:value="${studyGroupId}">
+                        <button type="submit" class="btn btn-sm"><p th:text="${comment.get(questionset.id)}"></p></button>
+                    </form>
+                    <form th:if="${checkToken != questionset.id}">
+                        <button type="button" class="btn btn-sm"><p th:text="${comment.get(questionset.id)}"></p></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+<!--        <div>-->
+<!--            <div th:each="meeting:${meetings}">-->
+<!--                <span th:text="${meeting.date.toLocalDate()}"></span>-->
+<!--                <button type="button" class="btn btn-primary">스터디 시작하기</button>-->
+<!--                <button type="button" class="btn btn-primary">스터디 해답보기</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <h2>스터디 예약 / 진행 현황</h2>-->
+<!--            <div th:if="${questionSets!=null}" th:each="question:${questionSets}">-->
+<!--                <span th:if="${ques}" th:text="${meeting.date.toLocalDate()}"> </span>-->
+<!--                <button type="button" class="btn btn-primary"><a th:href="@{/practice/{id}(id=${meeting.id})}">스터디 시작하기</a></button>-->
+<!--            </div>-->
+<!--        </div>-->
+
+    </div>
+</div>
+</html>

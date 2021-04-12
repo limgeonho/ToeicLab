@@ -1,0 +1,183 @@
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #444444;
+  width: 100%;
+}
+
+a {
+  color: #5fcf80;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #86db9f;
+  text-decoration: none;
+}
+
+/*h1, h2, h3, h4, h5, h6 {*/
+/*  font-family: "Open Sans", sans-serif;*/
+/*}*/
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+
+#header {
+  background: #ffffff;
+  transition: all 0.5s;
+  padding: 0;
+}
+
+#header .logo {
+  font-size: 1.875rem;
+  margin: 0;
+  padding: 0.35em;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.063rem;
+  text-transform: uppercase;
+  font-family: "Gugi", sans-serif;
+}
+
+#header .logo a {
+  color: #5fcf80;
+}
+
+#header .logo img {
+  max-height: 2.5rem;
+}
+
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+#header #navbar {
+  padding: 10px;
+  background: #ffffff;
+  box-shadow: 0em 0em 1.250em rgba(12, 137, 161, 0.25);
+
+}
+#header #navbar .nav-link{
+  padding: 0.625em;
+  font-family: "Gugi", sans-serif;
+  font-size: 0.938rem;
+}
+
+#btn-logout:hover{
+  color: #5fcf80;
+}
+
+.navbar ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+
+.navbar li {
+  position: relative;
+}
+
+.navbar a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625em 0 0.625em 0.625em;
+  font-family: "Gugi", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #37423b;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+.navbar a i {
+  font-size: 0.75rem;
+  line-height: 0;
+  margin-left: 0.313em;
+}
+
+
+.navbar a:hover, .navbar .active, .navbar li:hover > a {
+  color: #5fcf80;
+}
+
+.navbar .dropdown ul {
+  display: block;
+  position: absolute;
+  left: 1.875em;
+  top: calc(100% + 30px);
+  margin: 0;
+  padding: 0.625em 0;
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  background: #fff;
+  box-shadow: 0em 0em 1.875em rgba(127, 137, 161, 0.25);
+  transition: 0.3s;
+  border-radius: 0.250em;
+}
+
+.navbar .dropdown ul li {
+  min-width: 12.5em;
+}
+
+.navbar .dropdown ul a {
+  padding: 0.625em 1.250em;
+  font-size: 0.875rem;
+  text-transform: none;
+  font-weight: 500;
+}
+
+.navbar .dropdown ul a i {
+  font-size: 0.75rem;
+}
+
+.navbar .dropdown ul a:hover, .navbar .dropdown ul .active:hover, .navbar .dropdown ul li:hover > a {
+  color: #5fcf80;
+}
+
+.navbar .dropdown:hover > ul {
+  opacity: 1;
+  top: 100%;
+  visibility: visible;
+}
+
+.navbar .dropdown .dropdown ul {
+  top: 0;
+  left: calc(100% - 30px);
+  visibility: hidden;
+}
+
+.navbar .dropdown .dropdown:hover > ul {
+  opacity: 1;
+  top: 0;
+  left: 100%;
+  visibility: visible;
+}
+
+@media (max-width: 1366px) {
+  .navbar .dropdown .dropdown ul {
+    left: -90%;
+  }
+  .navbar .dropdown .dropdown:hover > ul {
+    left: -100%;
+  }
+}
+
+.container {
+  min-height: 50em;
+}
+
+#footer{
+  background-color: rgba(173, 169, 169, 0.123);
+  box-shadow: 0px 0px 3.125em rgba(12, 137, 161, 0.25);
+  margin-bottom: 0;
+  width: 100%;
+}
+#footer p {
+  color: rgb(77, 74, 74);
+}

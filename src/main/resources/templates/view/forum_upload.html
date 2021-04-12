@@ -1,0 +1,192 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Upload_Image'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/community/community.css}">
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="py-5">
+            <div class="row">
+                <form id="file_form" enctype="multipart/form-data">
+                    <div class="custom-file">
+                        <label class="custom-file-label" for="imageFile">파일선택</label>
+                        <input type="file" class="custom-file-input" name="file" id="imageFile" accept="image/*"/>
+                        <script>
+                            $('.custom-file-input').on('change', function () {
+                                var files = $(this)[0].files;
+                                name = '';
+                                for (var i = 0; i < files.length; i++) {
+                                    name += '\"' + files[i].name + '\"' + (i !== files.length - 1 ? ", " : "");
+                                }
+                                $(".custom-file-label").html(name);
+                            });
+                        </script>
+                    </div>
+                </form>
+                <div id="empty"></div>
+                <button class="btn btn-primary" id="readText" type="button">텍스트 추출</button>
+                <script th:inline="javascript">
+                    $(function (){
+                        $('#readText').on('click', function (){
+                            uploadFile();
+                        });
+                    });
+
+                    function uploadFile(){
+                        var token = $("meta[name='_csrf']").attr("content");
+                        var header = $("meta[name='_csrf_header']").attr("content");
+
+                        var form = $('#file_form')[0];
+                        var formData = new FormData(form);
+                        console.log(formData);
+                        for (var pair of formData.entries()) {
+                            console.log(pair[0]+ ', ' + pair[1]);
+                        }
+                        $.ajax({
+                            url: '/upload_img',
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            type: 'POST',
+                            beforeSend: function(xhr) {
+                                xhr.setRequestHeader(header, token);
+                            },
+                            success: function (data){
+                                document.getElementById("image-to-text").innerHTML = data;
+                            }
+                        });
+                    }
+
+                </script>
+            </div>
+
+                <br/>
+                <label for="image-to-text">사진을 읽은 결과</label><br/>
+                <textarea name="word"  id="image-to-text" class="form-control" readOnly></textarea>
+                <br/>
+
+            <form th:action="@{/forum_upload}" method="POST">
+                <div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">제목 </span>
+                        </div>
+                        <input class="form-control" id="title" type="text" placeholder="글의 제목을 입력하세요" th:name="title" required>
+                    </div>
+                    <br/>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> 문제 파트 </span>
+                        </div>
+                        <select class="form-control" id="questionType" th:name="questionType" required>
+                            <option value="part1">part1</option>
+                            <option value="part2">part2</option>
+                            <option value="part3">part3</option>
+                            <option value="part4">part4</option>
+                            <option value="part5">part5</option>
+                            <option value="part6">part6</option>
+                            <option value="part7">part7</option>
+                        </select>
+                    </div>
+                    <br/>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">지문1 </span>
+                        </div>
+                        <input class="form-control" id="content" type="text" placeholder="지문이 있는경우 복붙하세요"
+                               th:name="content1">
+                    </div>
+                    <br/>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">지문2 </span>
+                        </div>
+                        <input class="form-control" id="content2" type="text" placeholder="지문2가 있는경우 복붙하세요"
+                               th:name="content2">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">지문3 </span>
+                        </div>
+                        <input class="form-control" id="content3" type="text" placeholder="지문3가 있는경우 복붙하세요"
+                               th:name="content3">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">문제 </span>
+                        </div>
+                        <input class="form-control" id="question" type="text" placeholder="문제 설명을 복붙하세요"
+                               th:name="question" required>
+                    </div>
+                    <br/>
+
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">A. </span>
+                        </div>
+                        <input class="form-control" id="exampleA" type="text" placeholder="보기 A 를 입력하세요."
+                               th:name="exampleA" required>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">B. </span>
+                        </div>
+                        <input class="form-control" id="exampleB" type="text" placeholder="보기 B 를 입력하세요."
+                               th:name="exampleB" required>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">C. </span>
+                        </div>
+                        <input class="form-control" id="exampleC" type="text" placeholder="보기 C 를 입력하세요."
+                               th:name="exampleC" required>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">D. </span>
+                        </div>
+                        <input class="form-control" id="exampleD" type="text" placeholder="보기 D 를 입력하세요."
+                               th:name="exampleD" required>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">답. </span>
+                        </div>
+                        <input class="form-control" id="answer" type="text" placeholder="정답을 A,B,C,D 형식으로 입력하세요."
+                               th:name="answer" required>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">풀이. </span>
+                        </div>
+                        <input class="form-control" id="solution" type="text" placeholder="해설을 입력하세요."
+                               th:name="solution" required>
+                    </div>
+                </div>
+                <br/>
+                <div id="upload-submit">
+                    <button class="btn btn-primary" type="submit">등록하기</button>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+</div>
+
+</html>

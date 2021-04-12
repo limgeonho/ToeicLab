@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>토익연구소 크롤링 사전</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+<div>
+    <label th:for="inputWord" class="fixed-top">검색할 단어</label><br/>
+    <input type="text" th:id="inputWord" class="form-control" th:name="word">
+    <button type="button" id="find">검색</button>
+</div>
+<div>
+    <div>
+        <label for="word">영어 단어</label><input name="word"  type="text" id="word" value="" class="form-control" readonly><br/>
+        <label for="meaning">단어 뜻</label><input name="mean"  type="text" id="meaning" value="" class="form-control" readonly>
+        <button id="add_word_list" type="button" class="btn">단어장 추가</button>
+    </div>
+</div>
+
+<script th:inline="javascript">
+
+    $(document).ready(function (){
+        $("#find").click(function (){
+            $.ajax({
+                type: 'GET',
+                url: '/popup_dictionary_find/'+ $("#inputWord").val().toString(),
+                // data: "word=" + $("#inputWord").val(),
+                dataType: 'json',
+                success: function(data){
+                    var word = JSON.stringify(data.word);
+                    var meaning = JSON.stringify(data.meaning);
+                    // alert(word +" : " + meaning);
+                    $('input[name=word]').attr('value',word);
+                    $('input[name=mean]').attr('value',meaning);
+                },
+                error: function(){
+                    alert("검색한 단어를 찾지 못하였습니다."+"반대로 입력해보세요.")
+                }
+            });
+        });
+
+
+        $("#add_word_list").click(function (){
+            console.log("aa");
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            $.ajax({
+                type: 'POST',
+                url: '/add_word_list',
+                data: {"word": $("#word").val().toString(), "meaning": $("#meaning").val().toString(), "_csrf":token},
+                // data: "word=" + $("#word").val().toString() + "&meaning=" + $("#meaning").val().toString() + "&_csrf=" + token,
+                dataType: 'json',
+                success: function(result){
+                    $('.modal-body').html(result.message);
+                    $('#exampleModalCenter').modal('show');
+                },
+            });
+        });
+    });
+</script>
+<!--------------------------------Modal------------------------------------>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">토익연구소 크롤링 사전</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

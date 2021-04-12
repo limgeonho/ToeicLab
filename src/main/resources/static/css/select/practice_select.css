@@ -1,0 +1,28 @@
+label {
+    font-size: 1.75rem;
+}
+
+select {
+    font-size: 1.563rem;
+    padding-right: 1.250em;
+    margin-left: 1.250em;
+    width: 75px;
+}
+label, select, button {
+    font-family: "Hi Melody", sans-serif;
+}
+
+#PART5, #PART6 {
+    margin-left: 5.150em;
+}
+
+
+#lc-sub-btn, #rc-sub-btn {
+    text-align: right;
+    margin-right: 9.375em;
+    padding-top: 3.125em;
+}
+
+.col-6 {
+    text-align: center;
+}

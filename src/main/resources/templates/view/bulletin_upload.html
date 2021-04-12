@@ -1,0 +1,32 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Result!'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sheet/result_sheet.css}">
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="py-5">
+
+            <form th:action="@{/bulletin_upload}" method="post">
+                <div>
+                    <label for="title">글 제목</label>
+                    <input class="form-control" id="memberId" type="hidden" th:value="${member.getUserId()}" name="memberId">
+                    <input class="form-control" id="title" type="text" placeholder="제목을 입력하세요." name="title" required>
+
+                    <label for="content">글 내용</label>
+                    <textarea class="form-control" id="content" type="textarea" placeholder="내용을 입력하세요." name="content" required></textarea>
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-dark">등록하기</button>
+            </form>
+        </div>
+
+
+
+    </div>
+</div>
+</html>

@@ -1,0 +1,38 @@
+.div-common{
+    border: #817e7e2f solid 1px;
+    padding: 10px;
+    border-radius: 1em;
+    box-shadow: 0px 0px 5px rgba(9, 153, 40, 0.212);
+}
+
+.div-common-main {
+    padding: 10px;
+}
+
+.div-margin-bottom{
+    margin-bottom: 10px;
+}
+
+.div-only-padding{
+    padding: 10px;
+}
+
+#common-div1 {
+    width: 65.5%;
+    float: left;
+    margin-right:1.5%;
+}
+
+#common-div2 {
+    width: 33%;
+    float: right;
+}
+
+#head-word {
+    padding: 20px;
+}
+
+.div-margin-bottom2{
+    margin-bottom: 10px;
+    text-align: center;
+}

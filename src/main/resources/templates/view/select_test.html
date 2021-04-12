@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='select_test'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/select/select.css}">
+</th:block>
+
+
+    <div layout:fragment="content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-1"></div>
+                <div class="col-4.5">
+                    <div class="center">
+                        <a><b>LC/RC 모의 시험 보기</b></a>
+                    </div>
+                    <br/>
+                    <div class="select">
+                        <a th:href="@{/test/{type}(type=${'Quarter'})}">
+                            <button type="button" class="btn-t btn1">
+                                <p><b>1/4 모의 시험 (50문제)</b></p>
+                                <p><b> - 전체 시험의 1/4 규모</b></p>
+                                <p><b> - 시험시간 30분</b></p>
+                            </button>
+                        </a>
+                    </div>
+                    <div class="select">
+                        <a th:href="@{/test/{type}(type=${'Half'})}">
+                            <button type="button" class="btn-t btn1">
+                                <p><b>1/2 모의 시험 (100문제)</b></p>
+                                <p><b> - 전체 시험의 1/2 규모</b></p>
+                                <p><b> - 시험시간 60분</b></p>
+                            </button>
+                        </a>
+                    </div>
+                    <div class="select">
+                        <a th:href="@{/test/{type}(type=${'Full'})}">
+                            <button type="button" class="btn-t btn1">
+                                <p><b>실전 모의 시험 (200문제)</b></p>
+                                <p><b> - 전체 시험과 동일한 규모</b></p>
+                                <p><b> - 시험시간 120분</b></p>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-4.5">
+                    <div class="center">
+                        <a><b>SPEAKING 모의 시험 보기</b></a>
+                    </div>
+                    <div  class="select">
+                        <button type="button" class="btn-t btn1" style="margin-top: 120px;">
+                            <a data-toggle="modal" data-target="#service">
+                                <p><b>SPEAKING 1/2 모의 시험</b></p>
+                                <p><b> - 전체 시험의 1/2 규모</b></p>
+                                <p><b> - 시험시간 00분</b></p>
+                            </a>
+                        </button>
+                    </div>
+                    <div  class="select">
+                        <button type="button" class="btn-t btn1">
+                            <a data-toggle="modal" data-target="#service">
+                                <p><b>SPEAKING 전체 모의 시험</b></p>
+                                <p><b> - 실제 시험과 동일한 규모</b></p>
+                                <p><b> - 시험시간 00분</b></p>
+                            </a>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+    </div>
+</html>

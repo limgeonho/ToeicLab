@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='ReviewNote'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/member/progress.css}">
+</th:block>
+
+
+<div layout:fragment="content">
+    <div th:class="container">
+
+        <div class="row">
+
+            <div class="div-common-main" id="common-div1">
+                <div class="row justify-content-center div-margin-bottom" id="head-word">
+                    <a class="lead"><b>TOEIC Lv .</b><b th:text="${level}"></b></a>
+                </div>
+                <div class="div-common div-margin-bottom">
+                    <div class="row justify-content-center">
+                        <a><b>최근 학습 현황</b></a>
+                    </div>
+                    <hr>
+                    <p>QUARTER_TOEIC</p>
+                    <p th:if="${qToeic == null}">진행한 학습이 없습니다.</p>
+                    <form th:if="${qToeic != null}" th:action="@{/result_sheet/{questionSetId}(questionSetId=${qToeic.getId()})}" th:method="post">
+                        <input type="hidden" th:name="questionSetId" th:value="${qToeic.id}">
+                        <input type="hidden" th:each="map:${qToeic.submittedAnswers}" th:name="${map.getKey()}" th:value="${map.getValue()}">
+                        <button type="submit" class="btn btn-sm"><p th:text="${qToeicComment}"></p></button>
+                    </form>
+                    <hr>
+                    <p>HALF_TOEIC</p>
+                    <p th:if="${hToeic == null}">진행한 학습이 없습니다.</p>
+                    <form th:if="${hToeic != null}" th:action="@{/result_sheet/{questionSetId}(questionSetId=${hToeic.getId()})}" th:method="post">
+                        <input type="hidden" th:name="questionSetId" th:value="${hToeic.id}">
+                        <input type="hidden" th:each="map:${hToeic.submittedAnswers}" th:name="${map.getKey()}" th:value="${map.getValue()}">
+                        <button type="submit" class="btn btn-sm"><p th:text="${hToeicComment}"></p></button>
+                    </form>
+                    <hr>
+                    <p>FULL_TOEIC</p>
+                    <p th:if="${fToeic == null}">진행한 학습이 없습니다.</p>
+                    <form th:if="${fToeic != null}" th:action="@{/result_sheet/{questionSetId}(questionSetId=${fToeic.getId()})}" th:method="post">
+                        <input type="hidden" th:name="questionSetId" th:value="${fToeic.id}">
+                        <input type="hidden" th:each="map:${fToeic.submittedAnswers}" th:name="${map.getKey()}" th:value="${map.getValue()}">
+                        <button type="submit" class="btn btn-sm"><p th:text="${fToeicComment}"></p></button>
+                    </form>
+                    <hr>
+                    <p>PRACTICE</p>
+                    <p th:if="${pToeic == null}">진행한 학습이 없습니다.</p>
+                    <form th:if="${pToeic != null}" th:action="@{/result_sheet/{questionSetId}(questionSetId=${pToeic.getId()})}" th:method="post">
+                        <input type="hidden" th:name="questionSetId" th:value="${pToeic.id}">
+                        <input type="hidden" th:each="map:${pToeic.submittedAnswers}" th:name="${map.getKey()}" th:value="${map.getValue()}">
+                        <button type="submit" class="btn btn-sm"><p th:text="${pToeicComment}"></p></button>
+                    </form>
+                </div>
+
+                <div class="div-common div-margin-bottom">
+                    <div class="row justify-content-center">
+                        <a><b>전체 학습 COMMENT</b></a>
+                    </div>
+                    <hr>
+                    <p>PART 1</p>
+                    <p th:text="${part1}"></p>
+                    <hr>
+                    <p>PART 2</p>
+                    <p th:text="${part2}"></p>
+                    <hr>
+                    <p>PART 3</p>
+                    <p th:text="${part3}"></p>
+                    <hr>
+                    <p>PART 4</p>
+                    <p th:text="${part4}"></p>
+                    <hr>
+                    <p>PART 5</p>
+                    <p th:text="${part5}"></p>
+                    <hr>
+                    <p>PART 6</p>
+                    <p th:text="${part6}"></p>
+                    <hr>
+                    <p>PART 7_SINGLE_PARAGRAPH</p>
+                    <p th:text="${part7s}"></p>
+                    <hr>
+                    <p>PART 7_MULTIPLE_PARAGRAPH</p>
+                    <p th:text="${part7m}"></p>
+                </div>
+            </div>
+
+
+            <div class="div-common-main" id="common-div2">
+                <div class="row justify-content-center div-margin-bottom2" id="head-word">
+                    <a class="lead"><b>SPRAKING Lv .</b></a>
+                </div>
+                <div class="div-common div-margin-bottom2">
+                    <div class="row justify-content-center">
+                        <a><b>최근 학습 현황</b></a>
+                    </div>
+                    <hr>
+                    <hr>
+                    <p>서비스 준비중 입니다.</p>
+                    <hr>
+                    <hr>
+                </div>
+                <div class="div-common div-margin-bottom2">
+                    <div class="row justify-content-center">
+                        <a><b>COMMENT</b></a>
+                    </div>
+                    <hr>
+                    <hr>
+                    <hr>
+                    <hr>
+                    <hr>
+                    <hr>
+                    <hr>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+</html>

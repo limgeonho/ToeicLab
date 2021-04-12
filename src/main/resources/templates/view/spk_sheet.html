@@ -1,0 +1,142 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='RC_Sheet'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sheet/sheet.css}">
+</th:block>
+
+
+
+<div layout:fragment="content">
+    <div class="container">
+    <!--level 1 (Question1, 2)-->
+        <div class="py-5">
+            <div>
+                    <p>Directions:<br/>
+                    In this part of the test, you will read aloud the text on the screen.<br/>
+                    You will have 45 seconds to prepare.<br/>
+                    Then you will have 45 seconds to read the text aloud</p>
+            </div>
+            <div>
+                <label>
+                    여기가 토익스피킹 레벨1 text 들어갈곳
+                </label>
+            </div>
+        </div>
+
+        <!--level 2 (Question 3)-->
+        <div class="py-5">
+            <div>
+                <button class="btn btn-primary" onclick="">문제듣기</button>
+            </div>
+            <div>
+                <p>Directions:<br/>
+                    In this part of the test, you will describe the picture on your screen in as much detail as you can.<br/>
+                    You will have 30 seconds to prepare your response.<br/>
+                    Then you will have 45 seconds to speak about the picture.</p>
+            </div>
+            <div>
+                <p>여기가 토익스피킹 레벨3 이미지 들어갈곳</p>
+                <img th:src="@{/images/example/pic1.jpg}" class="img">
+            </div>
+        </div>
+
+        <!--level 3 (Question 4,5,6)-->
+        <div class="py-5">
+            <div>
+                <button class="btn btn-primary" onclick="">문제듣기</button>
+            </div>
+            <div>
+                <p>Directions:<br/>
+                    In this part of the test, you will answer three questions. For each question,<br/>
+                    begin responding immediately after you hear a beep.<br/>
+                    No preparation time is provided. You will have 15 seconds to respond to<br/>
+                    Questions 4 and 5 and 30 seconds to respond to Question 6.</p>
+            </div>
+            <div>
+                <div>
+                    <button class="btn btn-primary" onclick="">문제듣기</button>
+                </div>
+                <p>여기가 토익스피킹 레벨3 text 들어갈곳</p>
+            </div>
+        </div>
+
+        <!--level 4 (Question 7,8,9)-->
+        <div class="py-5">
+            <div>
+                <button class="btn btn-primary" onclick="">문제듣기</button>
+            </div>
+            <div>
+                <p>Directions:<br/>
+                    In this part of the test, you will answer three questions based on the information provided.<br/>
+                    You will have 30 seconds to read the information before the questions begin.<br/>
+                    For each question, begin responding immediately after you hear a beep.<br/>
+                    No additional preparation time is provided.<br/>
+                    You will have 15 seconds to respond to Questions 7 and 8 and 30 seconds to respond to Question 9.</p>
+            </div>
+            <div>
+                <p> text 든 img 든 information 들어가야하는자리</p>
+                <img>
+            </div>
+            <div>
+                <div>
+                    <button class="btn btn-primary" onclick="">문제듣기</button>
+                </div>
+                <p>여기가 토익스피킹 레벨4 text 들어갈곳</p>
+            </div>
+        </div>
+
+        <!--level 5 (Question 10)-->
+        <div class="py-5">
+            <div>
+                <button class="btn btn-primary" onclick="">문제듣기</button>
+            </div>
+            <div>
+                <p>Directions:<br/>
+                    In this part of the test, you will be presented with a problem and asked to propose a solution.<br/>
+                    You will have 30 seconds to prepare. Then you will have 60 seconds to speak.<br/>
+                    In your response, be sure to<br/>
+                    ㆍ show that you recognize the problem, and<br/>
+                    ㆍ propose a way of dealing with the problem.<br/>
+                    Now listen to the voice message.</p>
+            </div>
+            <div>
+                <div>
+                    <button class="btn btn-primary" onclick="">문제듣기</button>
+                </div>
+                <p>여기가 토익스피킹 레벨4 text 들어갈곳</p>
+            </div>
+        </div>
+
+        <!--level 6 (Question 11)-->
+        <div class="py-5">
+            <div>
+                <button class="btn btn-primary" onclick="">문제듣기</button>
+            </div>
+            <div>
+                <p>Directions:<br/>
+                    In this part of the test, you will give your opinion about a specific topic.<br/>
+                    Be sure to say as much as you can in the time allowed.<br/>
+                    You will have 15 seconds to prepare.<br/>
+                    Then you will have 60 seconds to speak.</p>
+            </div>
+            <div>
+                <div>
+                    <button class="btn btn-primary" onclick="">문제듣기</button>
+                </div>
+                <p>여기가 토익스피킹 레벨4 text 들어갈곳</p>
+            </div>
+        </div>
+
+
+
+        <div>
+            <form action="">
+                <button class="btn btn-primary">녹음</button>
+            </form>
+        </div>
+    </div><!--container-->
+</div>
+</html>

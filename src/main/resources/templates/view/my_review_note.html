@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='ReviewNote'">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/sheet/sheet.css}">
+</th:block>
+
+<div layout:fragment="content">
+
+    <script th:inline="javascript">
+        function a(test){
+            // alert(test);
+            $.ajax({
+                type: 'GET',
+                url: '/delete_review_note',
+                data: {id:test},
+                dataType: 'json',
+                success: function (result){
+                    $('.modal-body').html(result.message);
+                    $('#exampleModalCenter').modal('show');
+                    $('#exampleModalCenter').on('hidden.bs.modal', function () {
+                        location.reload();
+                    })
+                }
+            });
+        }
+    </script>
+
+    <div th:if="${exist} != null">
+        <div class="row justify-content-center" style="border: antiquewhite solid 1px; padding: 15px; margin-bottom: 20px;">
+            <a>
+                등록된 오답 문제가 없습니다.
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li th:if="${questionType.contains('PART1')}" class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#p1">part1</a>
+            </li>
+            <li th:if="${questionType.contains('PART2')}" class="nav-item">
+                <a th:classappend="${!questionType.contains('PART1')} ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#p2">part2</a>
+            </li>
+            <li th:if="${questionType.contains('PART3')}" class="nav-item">
+                <a th:classappend="${!questionType.contains('PART1') && !questionType.contains('PART2')} ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#p3">part3</a>
+            </li>
+            <li th:if="${questionType.contains('PART4')}" class="nav-item">
+                <a th:classappend="${!questionType.contains('PART1')&& !questionType.contains('PART2') && !questionType.contains('PART3')} ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#p4">part4</a>
+            </li>
+            <li th:if="${questionType.contains('PART5')}" class="nav-item">
+                <a th:classappend="${!questionType.contains('PART1') && !questionType.contains('PART2') && !questionType.contains('PART3') && !questionType.contains('PART4')} ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#p5">part5</a>
+            </li>
+            <li th:if="${questionType.contains('PART6')}" class="nav-item">
+                <a th:classappend="${!questionType.contains('PART1') && !questionType.contains('PART2') && !questionType.contains('PART3') && !questionType.contains('PART4') && !questionType.contains('PART5')} ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#p6">part6</a>
+            </li>
+            <li th:if="${questionType.contains('PART7_SINGLE_PARAGRAPH')}" class="nav-item">
+                <a th:classappend="${!questionType.contains('PART1') && !questionType.contains('PART2') && !questionType.contains('PART3') && !questionType.contains('PART4') && !questionType.contains('PART5') && !questionType.contains('PART6')} ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#p7s">part7s</a>
+            </li>
+            <li th:if="${questionType.contains('PART7_MULTIPLE_PARAGRAPH')}" class="nav-item">
+                <a th:classappend="${!questionType.contains('PART1') && !questionType.contains('PART2') && !questionType.contains('PART3') && !questionType.contains('PART4') && !questionType.contains('PART5') && !questionType.contains('PART6') && !questionType.contains('PART7_SINGLE_PARAGRAPH')} ? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#p7m">part7m</a>
+            </li>
+        </ul>
+        <!--tete-->
+        <div class="tab-content">
+            <!--PART1-->
+            <div th:if="${questionType.contains('PART1')}" class="tab-pane fade show active" id="p1">
+                <div class="banner">
+                    <p>
+                        Directions: For each question in this part, you will hear four statements about a picture in your test book.<br/>
+                        When you hear the statements, you must select the one statement that best describes what you see in the picture.<br/>
+                        Then find the number of the question on your answer sheet and mark your answer. <br/>
+                        The statements will not be printed in your test book and will be spoken only one time.
+                    </p>
+                    <hr/>
+                </div>
+                <ol class="list">
+                    <div class="py-5" th:each="question:${questionList}" th:if="${question.getQuestionType().toString().equals('PART1')}">
+                        <div class="row">
+                            <li class="col-1"></li>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-3" data-toggle="collapse" th:attr="data-target=|#a${question.id}|">문제보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" data-toggle="collapse" th:attr="data-target=|#b${question.id}|">해답보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" th:onclick="|javascript:a('${question.id}')|">삭제하기</button>
+                        </div>
+                        <div class="row">
+                            <img th:id="'a' + ${question.id}" th:src="@{'/images/place_holder_images/' + ${question.image}}" class="img collapse col-8">
+                            <audio th:id="'a' + ${question.id}" class="col-4 collapse" controls><source type="audio/mp3" th:src="@{'/audio/' + ${question.recording}}"></audio>
+                        </div>
+                        <div>
+                            <span th:id="'b'+ ${question.id}" class="collapse" th:text="'해석: ' + ${question.solution} + '정답: '+${question.answer} + '내가 쓴 답: ' + ${userAnswer.get(question.id)}"></span>
+                        </div>
+                    </div>
+                </ol>
+            </div>
+
+            <!--PART2-->
+            <div th:if="${questionType.contains('PART2')}" th:classappend="${!questionType.contains('PART1')} ? 'tab-pane fade show active' : 'tab-pane fade'" id="p2">
+                <div class="banner">
+                    <p>
+                        Directions: You will hear a question or statement and three responses spoken in English.<br/>
+                        They will not be printed in your test book and will be spoken only one time.<br/>
+                        Select the best response to the question or statement and mark the letter (A), (B), or (C) on you answer sheet.
+                    </p>
+                    <hr/>
+                </div>
+                <ol class="list">
+                    <div class="py-5" th:each="question:${questionList}" th:if="${question.getQuestionType().toString().equals('PART2')}">
+                        <div class="row">
+                            <li class="col-1"></li>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-3" data-toggle="collapse" th:attr="data-target=|#a${question.id}|">문제보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" data-toggle="collapse" th:attr="data-target=|#b${question.id}|">해답보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" th:onclick="|javascript:a('${question.id}')|">삭제하기</button>
+                            <hr/>
+                        </div>
+                        <div class="row">
+                            <p th:id="'a' + ${question.id}" th:text="${question.content}" class="collapse"></p>
+                            <audio class="collapse" th:id="'a' + ${question.id}" controls><source type="audio/mp3" th:src="@{'/audio/' + ${question.recording}}"></audio>
+                        </div>
+                        <div>
+                            <span th:id="'b'+ ${question.id}" class="collapse" th:text="'해석: ' + ${question.solution} + '정답: '+${question.answer} + '내가 쓴 답: ' + ${userAnswer.get(question.id)}"></span>
+                        </div>
+                    </div>
+                </ol>
+            </div>
+
+            <!--PART3-->
+            <div th:if="${questionType.contains('PART3')}" th:classappend="${!questionType.contains('PART1') && !questionType.contains('PART2')} ? 'tab-pane fade show active' : 'tab-pane fade'" id="p3">
+                <div class="banner">
+                    <p>
+                        Directions: You will hear some conversation between two or more people. <br/>
+                        You will be asked to answer three questions about what the speaker say in each conversation. <br/>
+                        Select the best response to each question and mark the letter (A), (B), (C), or (D) on your answer sheet. <br/>
+                        The conversations will not be printed in your test book and will be spoken only one time.
+                    </p>
+                    <hr/>
+                </div>
+                <ol class="list">
+                    <div class="py-5" th:each="question:${questionList}" th:if="${question.getQuestionType().toString().equals('PART3')}">
+                        <div class="row">
+                            <li class="col-1"></li>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-3" data-toggle="collapse" th:attr="data-target=|#a${question.id}|">문제보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" data-toggle="collapse" th:attr="data-target=|#b${question.id}|">해답보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" th:onclick="|javascript:a('${question.id}')|">삭제하기</button>
+                        </div>
+                        <div class="row">
+                        <span th:if="${question.image} != null">
+                            <img th:id="'a' + ${question.id}" th:src= "@{/images/place_holder_images/ + ${question.image}}" class="img  collapse" >
+                        </span>
+                            <p th:id="'a' + ${question.id}" th:text="${question.content}" class="collapse"></p>
+                            <audio th:id="'a' + ${question.id}" class="collapse" controls><source type="audio/mp3" th:src="@{'/audio/' + ${question.recording}}"></audio>
+                        </div>
+                        <div>
+                            <span th:id="'b'+ ${question.id}" class="collapse" th:text="'해석: ' + ${question.solution} + '정답: '+${question.answer} + '내가 쓴 답: ' + ${userAnswer.get(question.id)}"></span>
+                        </div>
+                    </div>
+                </ol>
+            </div>
+
+            <!--part4-->
+            <div th:if="${questionType.contains('PART4')}" th:classappend="${!questionType.contains('PART1')&& !questionType.contains('PART2') && !questionType.contains('PART3')} ? 'tab-pane fade show active' : 'tab-pane fade'" id="p4">
+                <div class="banner">
+                    <p>
+                        Directions: You will hear some talks given by a single speaker.<br/>
+                        You will be asked to answer three questions about what the speaker says in each talk.<br/>
+                        Select the best response to each question and mark the letter (A), (B), (C) or (D) on your answer sheet.<br/>
+                        the talk will not be printed in your test book and will be spoken only one time.
+                    </p>
+                </div>
+                <ol class="list">
+                    <div class="py-5" th:each="question:${questionList}" th:if="${question.getQuestionType().toString().equals('PART4')}">
+                        <div class="row">
+                            <li class="col-1"></li>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-3" data-toggle="collapse" th:attr="data-target=|#a${question.id}|">문제보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" data-toggle="collapse" th:attr="data-target=|#b${question.id}|">해답보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" th:onclick="|javascript:a('${question.id}')|">삭제하기</button>
+                        </div>
+                        <div>
+                        <span th:if="${question.image} != null">
+                            <img th:id="'a' + ${question.id}" th:src= "@{/images/place_holder_images/ + ${question.image}}" class="img  collapse" >
+                        </span>
+                            <p th:id="'a' + ${question.id}" th:text="${question.content}" class="collapse"></p>
+                            <audio th:id="'a' + ${question.id}" class="collapse" controls><source type="audio/mp3" th:src="@{'/audio/' + ${question.recording}}"></audio>
+                        </div>
+                        <div>
+                            <span th:id="'b'+ ${question.id}" class="collapse" th:text="'해석: ' + ${question.solution} + '정답: '+${question.answer} + '내가 쓴 답: ' + ${userAnswer.get(question.id)}"></span>
+                        </div>
+                    </div>
+                </ol>
+            </div>
+
+            <!--PART5-->
+            <div th:if="${questionType.contains('PART5')}" th:classappend="${!questionType.contains('PART1') && !questionType.contains('PART2') && !questionType.contains('PART3') && !questionType.contains('PART4')} ? 'tab-pane fade show active' : 'tab-pane fade'" id="p5">
+                <div class="banner">
+                    <p>
+                        Directions: A word or phrase is missing in each of the sentences below. <br/>
+                        Four answer choices are given below each sentence. Select the best answer to complete the sentence. <br/>
+                        Then mark the letter (A), (B), (C), or (D) on your answer sheet.
+                    </p>
+                </div>
+                <ol class="list">
+                    <div class="py-5" th:each="question:${questionList}" th:if="${question.getQuestionType().toString().equals('PART5')}">
+                        <div class="row">
+                            <li class="col-1"></li>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-3" data-toggle="collapse" th:attr="data-target=|#a${question.id}|">문제보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" data-toggle="collapse" th:attr="data-target=|#b${question.id}|">해답보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" th:onclick="|javascript:a('${question.id}')|">삭제하기</button>
+                            <hr/>
+                        </div>
+                        <div>
+                            <p th:id="'a' + ${question.id}" th:text="${question.content}" class="collapse"></p>
+                        </div>
+                        <div>
+                            <span th:id="'b'+ ${question.id}" class="collapse" th:text="'해석: ' + ${question.solution} + '정답: '+${question.answer} + '내가 쓴 답: ' + ${userAnswer.get(question.id)}"></span>
+                        </div>
+                    </div>
+                </ol>
+            </div>
+
+            <!--PART6-->
+            <div th:if="${questionType.contains('PART6')}" th:classappend="${!questionType.contains('PART1') && !questionType.contains('PART2') && !questionType.contains('PART3') && !questionType.contains('PART4') && !questionType.contains('PART5')} ? 'tab-pane fade show active' : 'tab-pane fade'" id="p6">
+                <div class="banner">
+                    <p>
+                        PART 6<br/>
+                        Directions: Read the texts that follow. A word, phrase, or sentence is missing in parts of each text.<br/>
+                        Four answer choices for each question are given below the text. <br/>
+                        Select the best answer to complete the text. <br/>
+                        Then mark the letter (A), (B), (C), or (D) on your answer sheet.
+                    </p>
+                </div>
+                <ol class="list">
+                    <div class="py-5" th:each="question:${questionList}" th:if="${question.getQuestionType().toString().equals('PART6')}">
+                        <div class="row">
+                            <li class="col-1"></li>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-3" data-toggle="collapse" th:attr="data-target=|#a${question.id}|">문제보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" data-toggle="collapse" th:attr="data-target=|#b${question.id}|">해답보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" th:onclick="|javascript:a('${question.id}')|">삭제하기</button>
+                            <hr/>
+                        </div>
+                        <div>
+                       <span th:if="${question.image} != null">
+                            <img th:id="'a' + ${question.id}" th:src= "@{/images/place_holder_images/ + ${question.image}}" class="img  collapse" >
+                        </span>
+                            <p th:id="'a' + ${question.id}" th:text="${question.content}" class="collapse"></p>
+                        </div>
+                        <div>
+                            <span th:id="'b'+ ${question.id}" class="collapse" th:text="'해석: ' + ${question.solution} + '정답: '+${question.answer} + '내가 쓴 답: ' + ${userAnswer.get(question.id)}"></span>
+                        </div>
+                    </div>
+                </ol>
+            </div>
+
+            <!--PART7-S-->
+            <div th:if="${questionType.contains('PART7_SINGLE_PARAGRAPH')}" th:classappend="${!questionType.contains('PART1') && !questionType.contains('PART2') && !questionType.contains('PART3') && !questionType.contains('PART4') && !questionType.contains('PART5') && !questionType.contains('PART6')} ? 'tab-pane fade show active' : 'tab-pane fade'" id="p7s">
+                <div class="banner">
+                    <p>
+                        PART 7<br/>
+                        Directions: In this part you will read a selection of texts, such as magazine and newspaper articles, e-mails, and instant messages. <br/>
+                        Each text or set of texts is followed by several questions. <br/>
+                        Select the best answer for each question and mark the letter (A), (B), (C), or (D) on your answer sheet.
+                    </p>
+                </div>
+                <ol class="list">
+                    <div class="py-5" th:each="question:${questionList}" th:if="${question.getQuestionType().toString().equals('PART7_SINGLE_PARAGRAPH')}">
+                        <div class="row">
+                            <li class="col-1"></li>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-3" data-toggle="collapse" th:attr="data-target=|#a${question.id}|">문제보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" data-toggle="collapse" th:attr="data-target=|#b${question.id}|">해답보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" th:onclick="|javascript:a('${question.id}')|">삭제하기</button>
+                            <hr/>
+                        </div>
+                        <div>
+                        <span th:if="${question.image} != null">
+                            <img th:id="'a' + ${question.id}" th:src= "@{/images/place_holder_images/ + ${question.image}}" class="img  collapse" >
+                        </span>
+                            <p th:id="'a' + ${question.id}" th:text="${question.content}" class="collapse"></p>
+                        </div>
+                        <div>
+                            <span th:id="'b'+ ${question.id}" class="collapse" th:text="'해석: ' + ${question.solution} + '정답: '+${question.answer} + '내가 쓴 답: ' + ${userAnswer.get(question.id)}"></span>
+                        </div>
+                    </div>
+                </ol>
+            </div>
+
+            <!--PART7-M-->
+            <div th:if="${questionType.contains('PART7_MULTIPLE_PARAGRAPH')}" th:classappend="${!questionType.contains('PART1') && !questionType.contains('PART2') && !questionType.contains('PART3') && !questionType.contains('PART4') && !questionType.contains('PART5') && !questionType.contains('PART6') && !questionType.contains('PART7_SINGLE_PARAGRAPH')} ? 'tab-pane fade show active' : 'tab-pane fade'" id="p7m">
+                <div class="banner">
+                    <p>
+                        PART 7<br/>
+                        Directions: In this part you will read a selection of texts, such as magazine and newspaper articles, e-mails, and instant messages. <br/>
+                        Each text or set of texts is followed by several questions. <br/>
+                        Select the best answer for each question and mark the letter (A), (B), (C), or (D) on your answer sheet.
+                    </p>
+                </div>
+                <ol class="list">
+                    <div class="py-5" th:each="question:${questionList}" th:if="${question.getQuestionType().toString().equals('PART7_MULTIPLE_PARAGRAPH')}">
+                        <div class="row">
+                            <li class="col-1"></li>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-3" data-toggle="collapse" th:attr="data-target=|#a${question.id}|">문제보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" data-toggle="collapse" th:attr="data-target=|#b${question.id}|">해답보기</button>
+                            <span class="col-1"></span>
+                            <button type="button" class="btn btn-sm col-2" th:onclick="|javascript:a('${question.id}')|">삭제하기</button>
+                            <hr/>
+                        </div>
+                        <div>
+                        <span th:if="${question.image} != null">
+                            <img th:id="'a' + ${question.id}" th:src= "@{/images/place_holder_images/ + ${question.image}}" class="img  collapse" >
+                        </span>
+                            <p th:id="'a' + ${question.id}" th:text="${question.content}" class="collapse"></p>
+                        </div>
+                        <div>
+                            <span th:id="'b'+ ${question.id}" class="collapse" th:text="'해석: ' + ${question.solution} + '정답: '+${question.answer} + '내가 쓴 답: ' + ${userAnswer.get(question.id)}"></span>
+                        </div>
+                    </div>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

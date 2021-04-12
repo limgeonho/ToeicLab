@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Create Meeting!'">
+
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/meeting/meeting.css}">
+</th:block>
+<th:block layout:fragment="js">
+    <script type="text/javascript" th:src="@{/js/meeting/add_row.js}"></script>
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <div id="create-meeting">
+            <form th:action="@{/create_meeting/{id}(id=${studyGroupId})}" th:method="post">
+                <div id="time" th:id="time">
+                    <h4>일시: <input type="date" th:name="date" required></h4>
+                </div>
+                <div id="top" class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <h1>TOEIC</h1>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <h1>TOEIC SPEAKING</h1>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div id="bottom" class="row">
+                    <div class="col-md-1"></div>
+                    <div class="py-5 col-md-4" >
+                        <div id="RC-LC-box1" class="row RC-LC-Box">
+                            <label class="col-3">
+                                <select class="form-line-select" id="form1_1" th:name="select_form" style="display: none" onchange="partChange1()" disabled required>
+                                    <option th:selected th:value="null">선택</option>
+                                    <option th:value="LC">LC</option>
+                                    <option th:value="RC">RC</option>
+                                    <option></option>
+                                </select>
+                            </label>
+                            <label class="col-4">
+                                <select class="form-line-select" id="form1_2" th:name="select_form" style="display: none" disabled required>
+                                    <option th:selected th:value="null">PART 선택</option>
+                                </select>
+                            </label>
+                            <label class="col-3">
+                                <select class="form-line-select" id="form1_3" th:name="select_form" style="display: none" disabled required>
+                                    <option th:selected th:value="null">문항선택</option>
+                                    <option th:value="5">5</option>
+                                    <option th:value="10">10</option>
+                                    <option th:value="15">15</option>
+                                    <option th:value="20">20</option>
+                                </select>
+                            </label>
+                            <button type="button" class="col-2 btn btn-sm far fa-trash-alt" id="btn-m-2" style="display: none"></button>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-block" id="btn-p-1">+</button>
+
+                        <div id="RC-LC-box2" class="row RC-LC-Box">
+                            <label  class="col-3">
+                                <select class="form-line-select" id="form2_1" th:name="select_form" style="display: none" onchange="partChange2()" disabled required>
+                                    <option th:selected th:value="null">선택</option>
+                                    <option th:value="LC">LC</option>
+                                    <option th:value="RC">RC</option>
+                                </select>
+                            </label>
+                            <label class="col-4">
+                                <select class="form-line-select" id="form2_2" th:name="select_form" style="display: none" disabled required>
+                                    <option th:selected th:value="null">PART 선택</option>
+                                </select>
+                            </label>
+                            <label  class="col-3">
+                                <select class="form-line-select" id="form2_3" th:name="select_form" style="display: none" disabled required>
+                                    <option th:selected th:value="null">문항선택</option>
+                                    <option th:value="5">5</option>
+                                    <option th:value="10">10</option>
+                                    <option th:value="15">15</option>
+                                    <option th:value="20">20</option>
+                                </select>
+                            </label>
+                            <button type="button" class="col-2 btn btn-sm far fa-trash-alt" id="btn-m-3" style="display: none"></button>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-block" id="btn-p-2" style="display: none">+</button>
+
+                        <div id="RC-LC-box3" class="row RC-LC-Box">
+                            <label  class="col-3">
+                                <select class="form-line-select" id="form3_1" th:name="select_form" style="display: none" onchange="partChange3()" disabled required>
+                                    <option th:selected th:value="null">선택</option>
+                                    <option th:value="LC">LC</option>
+                                    <option th:value="RC">RC</option>
+                                </select>
+                            </label>
+                            <label class="col-4">
+                                <select class="form-line-select" id="form3_2" th:name="select_form" style="display: none" disabled required>
+                                    <option th:selected th:value="null">PART 선택</option>
+                                </select>
+                            </label>
+                            <label  class="col-3">
+                                <select class="form-line-select" id="form3_3" th:name="select_form" style="display: none" disabled required>
+                                    <option th:selected th:value="null">문항선택</option>
+                                    <option th:value="5">5</option>
+                                    <option th:value="10">10</option>
+                                    <option th:value="15">15</option>
+                                    <option th:value="20">20</option>
+                                </select>
+                            </label>
+                            <button type="button" class="col-2 btn btn-sm far fa-trash-alt" id="btn-m-4" style="display: none"></button>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-block" id="btn-p-3" style="display: none">+</button>
+
+                        <div id="RC-LC-box4" class="row RC-LC-Box">
+                            <label  class="col-3">
+                                <select class="form-line-select" id="form4_1" th:name="select_form" style="display: none" onchange="partChange4()" disabled required>
+                                    <option th:selected th:value="null">선택</option>
+                                    <option th:value="LC">LC</option>
+                                    <option th:value="RC">RC</option>
+                                </select>
+                            </label>
+                            <label class="col-4">
+                                <select class="form-line-select" id="form4_2" th:name="select_form" style="display: none" disabled required>
+                                    <option th:selected th:value="null">PART 선택</option>
+                                </select>
+                            </label>
+                            <label  class="col-3">
+                                <select class="form-line-select" id="form4_3" th:name="select_form" style="display: none" disabled required>
+                                    <option th:selected th:value="null">문항선택</option>
+                                    <option th:value="5">5</option>
+                                    <option th:value="10">10</option>
+                                    <option th:value="15">15</option>
+                                    <option th:value="20">20</option>
+                                </select>
+                            </label>
+                            <button type="button" class="col-2 btn btn-sm far fa-trash-alt" id="btn-m-5" style="display: none"></button>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-block" id="btn-p-4" style="display: none">+</button>
+
+                        <div id="RC-LC-box5" class="row RC-LC-Box">
+                            <label  class="col-3">
+                                <select class="form-line-select" id="form5_1" th:name="select_form" style="display: none" onchange="partChange5()" disabled required>
+                                    <option th:selected th:value="null">선택</option>
+                                    <option th:value="LC">LC</option>
+                                    <option th:value="RC">RC</option>
+                                </select>
+                            </label>
+                            <label class="col-4">
+                                <select class="form-line-select" id="form5_2" th:name="select_form" style="display: none" disabled required>
+                                    <option th:selected th:value="null">PART 선택</option>
+                                </select>
+                            </label>
+                            <label  class="col-3">
+                                <select class="form-line-select" id="form5_3" th:name="select_form" style="display: none" disabled required>
+                                    <option th:selected th:value="null">문항선택</option>
+                                    <option th:value="5">5</option>
+                                    <option th:value="10">10</option>
+                                    <option th:value="15">15</option>
+                                    <option th:value="20">20</option>
+                                </select>
+                            </label>
+                            <button type="button" class="col-2 btn btn-sm far fa-trash-alt" id="btn-m-6" style="display: none"></button>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-block" id="btn-p-5" style="display: none">+</button>
+
+                        <div id="RC-LC-box6" class="row RC-LC-Box">
+                            <label  class="col-3">
+                                <select class="form-line-select" id="form6_1" th:name="select_form" style="display: none" onchange="partChange6()" disabled required>
+                                    <option th:selected th:value="null">선택</option>
+                                    <option th:value="LC">LC</option>
+                                    <option th:value="RC">RC</option>
+                                </select>
+                            </label>
+                            <label class="col-4">
+                                <select class="form-line-select" id="form6_2" th:name="select_form" style="display: none" disabled required>
+                                    <option th:selected th:value="null">PART 선택</option>
+                                </select>
+                            </label>
+                            <label  class="col-3">
+                                <select class="form-line-select" id="form6_3" th:name="select_form" style="display: none" disabled required>
+                                    <option th:selected th:value="null">문항선택</option>
+                                    <option th:value="5">5</option>
+                                    <option th:value="10">10</option>
+                                    <option th:value="15">15</option>
+                                    <option th:value="20">20</option>
+                                </select>
+                            </label>
+                            <button type="button" class="col-2 btn btn-sm far fa-trash-alt" id="btn-m-7" style="display: none"></button>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-block" id="btn-p-6" style="display: none">+</button>
+
+                        <div id="RC-LC-box7" class="row RC-LC-Box">
+                            <label  class="col-3">
+                                <select class="form-line-select" id="form7_1" th:name="select_form" style="display: none" onchange="partChange7()" disabled required>
+                                    <option th:selected th:value="null">선택</option>
+                                    <option th:value="LC">LC</option>
+                                    <option th:value="RC">RC</option>
+                                </select>
+                            </label>
+                            <label class="col-4">
+                                <select class="form-line-select" id="form7_2" th:name="select_form" style="display: none" disabled required>
+                                    <option th:selected th:value="null">PART 선택</option>
+                                </select>
+                            </label>
+                            <label  class="col-3">
+                                <select class="form-line-select" id="form7_3" th:name="select_form" style="display: none" disabled required>
+                                    <option th:selected th:value="null">문항선택</option>
+                                    <option th:value="5">5</option>
+                                    <option th:value="10">10</option>
+                                    <option th:value="15">15</option>
+                                    <option th:value="20">20</option>
+                                </select>
+                            </label>
+                            <button type="button" class="col-2 btn btn-sm far fa-trash-alt" id="btn-m-8" style="display: none"></button>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-block" id="btn-p-7" style="display: none">+</button>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="py-5 col-md-4">
+                        <div id="SPK-box">
+
+                        </div>
+                        <button type="button" class="btn btn-outline-primary btn-block" id="add-SPK-meeting" >+</button>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div id="sub-btn">
+                    <button type="submit" class="btn btn-primary float-right" >스터디 생성하기</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>
